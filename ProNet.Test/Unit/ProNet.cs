@@ -12,7 +12,8 @@ namespace ProNet.Test.Unit
         public void Should_calculate_programmer_rank()
         {
             var programmer1 = new Programmer("Dave", new List<string>{"Bill"});
-            programmer1.UpdateRank(new Dictionary<string, Tuple<decimal, int>>{{"Bill", new Tuple<decimal,int>(0m, 1)}, {"Dave", new Tuple<decimal, int>(0m, 1)}});
+            var programmer2 = new Programmer("Bill", new List<string>{"Dave"});
+            programmer1.UpdateRank(new Dictionary<string, Tuple<decimal, int>>{{"Bill", new Tuple<decimal,int>(programmer2.Rank, programmer2.NumberOfRecommendations)}, {"Dave", new Tuple<decimal, int>(programmer1.Rank, programmer1.NumberOfRecommendations)}});
             Assert.That(programmer1.Rank, Is.EqualTo(0.15m));
         }
 
