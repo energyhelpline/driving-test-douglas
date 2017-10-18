@@ -33,7 +33,7 @@ namespace ProNet.Test.Unit
 
             programmer1.Recommends(programmer2);
 
-            Assert.That(programmer1.NumberOfRecommendations, Is.EqualTo(1));
+            Assert.That(programmer1.RecommendationsGivenCount, Is.EqualTo(1));
         }
     }
 
@@ -51,14 +51,14 @@ namespace ProNet.Test.Unit
             _recommendationsReceived = new List<Programmer>();
         }
 
-        public int NumberOfRecommendations => _recommendationsGiven.Count;
+        public int RecommendationsGivenCount => _recommendationsGiven.Count;
         public decimal Rank => _rank;
         public string Name => _name;
 
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            _rank = (1m - 0.85m) + (0.85m * (_recommendationsReceived.First().Rank/_recommendationsReceived.First().NumberOfRecommendations));
+            _rank = (1m - 0.85m) + (0.85m * (_recommendationsReceived.First().Rank/_recommendationsReceived.First().RecommendationsGivenCount));
         }
 
         public void Recommends(Programmer programmer)
