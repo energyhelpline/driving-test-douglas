@@ -20,7 +20,7 @@ namespace ProNet.Test.Unit
         [Test]
         public void Should_calculate_the_number_of_recommendations_they_have()
         {
-            var programmer = new Programmer("Dave", new List<string> {"Bill"});
+            var programmer = new Programmer("Dave", new List<string> { "Bill" });
             Assert.That(programmer.NumberOfRecommendations, Is.EqualTo(1));
         }
     }
@@ -29,7 +29,6 @@ namespace ProNet.Test.Unit
     {
         private readonly List<string> _recommendations;
         private readonly string _name;
-        public decimal Rank { get; private set; }
 
         public Programmer(string name, List<string> recommendations)
         {
@@ -37,6 +36,7 @@ namespace ProNet.Test.Unit
         }
 
         public int NumberOfRecommendations => _recommendations.Count;
+        public decimal Rank { get; private set; }
 
         public void UpdateRank(Dictionary<string, Tuple<decimal, int>> programmerRanks)
         {
