@@ -40,35 +40,35 @@ namespace ProNet.Test.Unit
     public class Programmer
     {
         private readonly string _name;
-        private readonly List<Programmer> _recommends;
-        private readonly List<Programmer> _isRecommendedBy;
+        private readonly List<Programmer> _recommendationsGiven;
+        private readonly List<Programmer> _recommendationsReceived;
         private decimal _rank;
 
         public Programmer(string name)
         {
             _name = name;
-            _recommends = new List<Programmer>();
-            _isRecommendedBy = new List<Programmer>();
+            _recommendationsGiven = new List<Programmer>();
+            _recommendationsReceived = new List<Programmer>();
         }
 
-        public int NumberOfRecommendations => _recommends.Count;
+        public int NumberOfRecommendations => _recommendationsGiven.Count;
         public decimal Rank => _rank;
         public string Name => _name;
 
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            _rank = (1m - 0.85m) + (0.85m * (_isRecommendedBy.First().Rank/_isRecommendedBy.First()._recommends.Count));
+            _rank = (1m - 0.85m) + (0.85m * (_recommendationsReceived.First().Rank/_recommendationsReceived.First().NumberOfRecommendations));
         }
 
         public void Recommends(Programmer programmer)
         {
-            _recommends.Add(programmer);
+            _recommendationsGiven.Add(programmer);
         }
 
         public void IsRecommendedBy(Programmer programmer)
         {
-            _isRecommendedBy.Add(programmer);
+            _recommendationsReceived.Add(programmer);
         }
     }
 }
