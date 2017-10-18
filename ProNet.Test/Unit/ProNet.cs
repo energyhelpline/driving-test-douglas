@@ -42,6 +42,7 @@ namespace ProNet.Test.Unit
         private readonly string _name;
         private readonly List<Programmer> _recommends;
         private readonly List<Programmer> _isRecommendedBy;
+        private decimal _rank;
 
         public Programmer(string name)
         {
@@ -51,13 +52,13 @@ namespace ProNet.Test.Unit
         }
 
         public int NumberOfRecommendations => _recommends.Count;
-        public decimal Rank { get; private set; }
+        public decimal Rank => _rank;
         public string Name => _name;
 
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            Rank = (1m - 0.85m) + (0.85m * (_isRecommendedBy.First().Rank/_isRecommendedBy.First()._recommends.Count));
+            _rank = (1m - 0.85m) + (0.85m * (_isRecommendedBy.First().Rank/_isRecommendedBy.First()._recommends.Count));
         }
 
         public void Recommends(Programmer programmer)
