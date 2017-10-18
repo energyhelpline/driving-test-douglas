@@ -14,7 +14,13 @@ Task("Run-Unit-Tests")
       NUnit(assemblies);
   });
 
+Task("Nuget-Restore")
+  .Does(() => {
+    NuGetRestore("ProNet.sln");
+  });
+
 Task("Build")
+  .IsDependentOn("Nuget-Restore")
   .Does(() =>
   {
     var settings = new MSBuildSettings {Configuration = "Release" };
