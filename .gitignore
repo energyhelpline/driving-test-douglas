@@ -4,3 +4,4 @@ packages/
 *.suo
 .vs/
 tools/
+TestResult.xml
