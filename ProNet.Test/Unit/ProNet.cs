@@ -13,7 +13,7 @@ namespace ProNet.Test.Unit
         {
             var programmer1 = new Programmer("Dave", new List<string>{"Bill"});
             var programmer2 = new Programmer("Bill", new List<string>{"Dave"});
-            programmer1.UpdateRank(new Dictionary<string, Tuple<decimal, int>>{{"Bill", new Tuple<decimal,int>(programmer2.Rank, programmer2.NumberOfRecommendations)}, {"Dave", new Tuple<decimal, int>(programmer1.Rank, programmer1.NumberOfRecommendations)}});
+            programmer1.UpdateRank(new Dictionary<string, Tuple<decimal, int>>{{programmer1.Name, new Tuple<decimal,int>(programmer2.Rank, programmer2.NumberOfRecommendations)}, {programmer2.Name, new Tuple<decimal, int>(programmer1.Rank, programmer1.NumberOfRecommendations)}});
             Assert.That(programmer1.Rank, Is.EqualTo(0.15m));
         }
 
@@ -32,11 +32,13 @@ namespace ProNet.Test.Unit
 
         public Programmer(string name, List<string> recommendations)
         {
+            _name = name;
             _recommendations = recommendations;
         }
 
         public int NumberOfRecommendations => _recommendations.Count;
         public decimal Rank { get; private set; }
+        public string Name => _name;
 
         public void UpdateRank(Dictionary<string, Tuple<decimal, int>> programmerRanks)
         {
