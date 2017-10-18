@@ -11,9 +11,9 @@ namespace ProNet.Test.Unit
         [Test]
         public void Should_calculate_programmer_rank()
         {
-            var programmer = new Programmer("Dave", new List<string>{"Bill"});
-            var programmerRank = programmer.Rank(new Dictionary<string, Tuple<decimal, int>>{{"Bill", new Tuple<decimal,int>(0m, 1)}, {"Dave", new Tuple<decimal, int>(0m, 1)}});
-            Assert.That(programmerRank, Is.EqualTo(0.15m));
+            var programmer1 = new Programmer("Dave", new List<string>{"Bill"});
+            programmer1.UpdateRank(new Dictionary<string, Tuple<decimal, int>>{{"Bill", new Tuple<decimal,int>(0m, 1)}, {"Dave", new Tuple<decimal, int>(0m, 1)}});
+            Assert.That(programmer1.Rank, Is.EqualTo(0.15m));
         }
 
         [Test]
@@ -35,11 +35,12 @@ namespace ProNet.Test.Unit
         }
 
         public int NumberOfRecommendations => _recommendations.Count;
+        public decimal Rank { get; private set; }
 
-        public decimal Rank(Dictionary<string, Tuple<decimal, int>> programmerRanks)
+        public void UpdateRank(Dictionary<string, Tuple<decimal, int>> programmerRanks)
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            return (1m - 0.85m) + (0.85m * (programmerRanks[_recommendations.First()].Item1/programmerRanks[_recommendations.First()].Item2));
+            Rank = (1m - 0.85m) + (0.85m * (programmerRanks[_recommendations.First()].Item1/programmerRanks[_recommendations.First()].Item2));
         }
     }
 }
