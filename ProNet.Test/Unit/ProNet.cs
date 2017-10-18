@@ -9,16 +9,13 @@ namespace ProNet.Test.Unit
     public class ProNet
     {
         [Test]
-        public void Should_calculate_programmer_rank_for_two_programmers_with_a_single_recommendation()
+        public void Should_calculate_programmer_rank_for_a_programmer_with_a_single_recommendation()
         {
             var programmer1 = new Programmer("Dave");
             var programmer2 = new Programmer("Bill");
 
-            programmer1.Recommends(programmer2);
             programmer1.IsRecommendedBy(programmer2);
-
             programmer2.Recommends(programmer1);
-            programmer2.IsRecommendedBy(programmer1);
 
             programmer1.UpdateRank();
 
