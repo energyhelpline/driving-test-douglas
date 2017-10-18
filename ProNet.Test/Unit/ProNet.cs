@@ -28,6 +28,7 @@ namespace ProNet.Test.Unit
     {
         private readonly List<string> _recommendations;
         private readonly string _name;
+        public decimal Rank { get; private set; }
 
         public Programmer(string name, List<string> recommendations)
         {
@@ -35,7 +36,6 @@ namespace ProNet.Test.Unit
         }
 
         public int NumberOfRecommendations => _recommendations.Count;
-        public decimal Rank { get; private set; }
 
         public void UpdateRank(Dictionary<string, Tuple<decimal, int>> programmerRanks)
         {
