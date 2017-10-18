@@ -9,11 +9,11 @@ namespace ProNet.Test.Unit
     public class ProNet
     {
         [Test]
-        public void Should_calculate_programmer_rank()
+        public void Should_calculate_programmer_rank_for_two_programmers_with_a_single_recommendation()
         {
             var programmer1 = new Programmer("Dave", new List<string>{"Bill"});
             var programmer2 = new Programmer("Bill", new List<string>{"Dave"});
-            programmer1.UpdateRank(new Dictionary<string, Tuple<decimal, int>>{{programmer1.Name, new Tuple<decimal,int>(programmer2.Rank, programmer2.NumberOfRecommendations)}, {programmer2.Name, new Tuple<decimal, int>(programmer1.Rank, programmer1.NumberOfRecommendations)}});
+            programmer1.UpdateRank(new Dictionary<string, Programmer>{{programmer1.Name, programmer2}, {programmer2.Name, programmer1}});
             Assert.That(programmer1.Rank, Is.EqualTo(0.15m));
         }
 
@@ -40,10 +40,10 @@ namespace ProNet.Test.Unit
         public decimal Rank { get; private set; }
         public string Name => _name;
 
-        public void UpdateRank(Dictionary<string, Tuple<decimal, int>> programmerRanks)
+        public void UpdateRank(Dictionary<string, Programmer> programmerRanks)
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            Rank = (1m - 0.85m) + (0.85m * (programmerRanks[_recommendations.First()].Item1/programmerRanks[_recommendations.First()].Item2));
+            Rank = (1m - 0.85m) + (0.85m * (programmerRanks[_recommendations.First()].Rank/programmerRanks[_recommendations.First()].NumberOfRecommendations));
         }
     }
 }
