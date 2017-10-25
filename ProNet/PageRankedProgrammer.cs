@@ -5,14 +5,14 @@ namespace ProNet
 {
     public class PageRankedProgrammer : IRankedProgrammer
     {
-        private readonly List<IRankedProgrammer> _recommendationsGiven;
-        private readonly List<IRankedProgrammer> _recommendationsReceived;
+        private readonly List<IRankedProgrammer> _recommends;
+        private readonly List<IRankedProgrammer> _recommendedBy;
         private decimal _rank;
 
         public PageRankedProgrammer()
         {
-            _recommendationsGiven = new List<IRankedProgrammer>();
-            _recommendationsReceived = new List<IRankedProgrammer>();
+            _recommends = new List<IRankedProgrammer>();
+            _recommendedBy = new List<IRankedProgrammer>();
         }
 
         public decimal Rank
@@ -21,24 +21,24 @@ namespace ProNet
             set => _rank = value;
         }
 
-        public decimal ProgrammerRankShare => _rank / _recommendationsGiven.Count();
+        public decimal ProgrammerRankShare => _rank / _recommends.Count();
 
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            _rank = _recommendationsReceived
+            _rank = _recommendedBy
                 .Aggregate(1m - 0.85m, (current, programmer) => current + 0.85m * programmer.ProgrammerRankShare);
         }
 
         public void Recommends(IRankedProgrammer programmer)
         {
-            _recommendationsGiven.Add(programmer);
+            _recommends.Add(programmer);
             programmer.RecommendedBy(this);
         }
 
         public void RecommendedBy(IRankedProgrammer programmer)
         {
-            _recommendationsReceived.Add(programmer);
+            _recommendedBy.Add(programmer);
         }
     }
 
