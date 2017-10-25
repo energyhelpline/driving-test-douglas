@@ -58,10 +58,6 @@ namespace ProNet.Test.Unit.ProgrammerRank
                 .Received(2)
                 .UpdateRank();
         }
-
-        // something about a collection of rankedProgrammers
-        // something about looping through that collection updating their ranks
-        // something about keeping looping until the average is 1
     }
 
     public class ProgrammerRank
