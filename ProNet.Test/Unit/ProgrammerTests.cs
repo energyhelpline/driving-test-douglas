@@ -74,7 +74,7 @@ namespace ProNet.Test.Unit
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            _rank = (1m - 0.85m) + (0.85m * (_recommendationsReceived.First().Rank/_recommendationsReceived.First().RecommendationsGivenCount));
+            _rank = (1m - 0.85m) + (0.85m * (_recommendationsReceived.First().ProgrammerRankShare));
         }
 
         public void Recommends(Programmer programmer)
