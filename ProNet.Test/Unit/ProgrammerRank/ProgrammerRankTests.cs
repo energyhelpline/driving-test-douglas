@@ -12,7 +12,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
         {
             var programmer = Substitute.For<IRankUpdateable>();
 
-            var programmerRank = new ProgrammerRank(programmer);
+            var programmerRank = new ProgrammerRank(new List<IRankUpdateable>{programmer});
 
             programmerRank.Calculate();
 
@@ -47,12 +47,6 @@ namespace ProNet.Test.Unit.ProgrammerRank
     public class ProgrammerRank
     {
         private readonly List<IRankUpdateable> _programmers;
-        private readonly IRankUpdateable _programmer;
-
-        public ProgrammerRank(IRankUpdateable programmer)
-        {
-            _programmer = programmer;
-        }
 
         public ProgrammerRank(List<IRankUpdateable> programmers)
         {
@@ -61,13 +55,10 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
         public void Calculate()
         {
-            _programmer?.UpdateRank();
-
-            if (_programmers != null)
-                foreach (var programmer in _programmers)
-                {
-                    programmer.UpdateRank();
-                }
+            foreach (var programmer in _programmers)
+            {
+                programmer.UpdateRank();
+            }
         }
     }
 }
