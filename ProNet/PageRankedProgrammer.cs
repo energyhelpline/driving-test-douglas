@@ -7,8 +7,8 @@ namespace ProNet
     [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
     public class PageRankedProgrammer : IRankedProgrammer, IRankUpdateable
     {
-        private readonly List<IRankedProgrammer> _recommends;
-        private readonly List<IRankedProgrammer> _recommendedBy;
+        private readonly ICollection<IRankedProgrammer> _recommends;
+        private readonly ICollection<IRankedProgrammer> _recommendedBy;
         private decimal _rank;
 
         public PageRankedProgrammer()
