@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProNet.cs" />
-    <Compile Include="Programmer.cs" />
+    <Compile Include="PageRankedProgrammer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
