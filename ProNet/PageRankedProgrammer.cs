@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace ProNet
 {
+    [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
     public class PageRankedProgrammer : IRankedProgrammer
     {
         private readonly List<IRankedProgrammer> _recommends;
