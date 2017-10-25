@@ -23,17 +23,6 @@ namespace ProNet.Test.Unit
         }
 
         [Test]
-        public void Should_calculate_the_number_of_recommendations_they_have()
-        {
-            var programmer1 = new Programmer("Dave");
-            var programmer2 = new Programmer("Bill");
-
-            programmer1.Recommends(programmer2);
-
-            Assert.That(programmer1.RecommendationsGivenCount, Is.EqualTo(1));
-        }
-
-        [Test]
         public void Should_calculate_the_share_of_page_rank()
         {
             var programmer1 = new Programmer("Programmer1");
@@ -62,7 +51,6 @@ namespace ProNet.Test.Unit
             _recommendationsReceived = new List<Programmer>();
         }
 
-        public int RecommendationsGivenCount => _recommendationsGiven.Count;
         public decimal Rank
         {
             get => _rank;
