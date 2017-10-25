@@ -14,7 +14,6 @@ namespace ProNet.Test.Unit
             var programmer1 = new Programmer("Dave");
             var programmer2 = new Programmer("Bill");
 
-            programmer1.IsRecommendedBy(programmer2);
             programmer2.Recommends(programmer1);
 
             programmer1.UpdateRank();
@@ -41,14 +40,12 @@ namespace ProNet.Test.Unit
     {
         private readonly string _name;
         private readonly List<Programmer> _recommendationsGiven;
-        private readonly List<Programmer> _recommendationsReceived;
         private decimal _rank;
 
         public Programmer(string name)
         {
             _name = name;
             _recommendationsGiven = new List<Programmer>();
-            _recommendationsReceived = new List<Programmer>();
         }
 
         public decimal Rank
@@ -62,17 +59,12 @@ namespace ProNet.Test.Unit
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            _rank = (1m - 0.85m) + (0.85m * (_recommendationsReceived.First().ProgrammerRankShare));
+            _rank = (1m - 0.85m) + (0.85m * (0));
         }
 
         public void Recommends(Programmer programmer)
         {
             _recommendationsGiven.Add(programmer);
-        }
-
-        public void IsRecommendedBy(Programmer programmer)
-        {
-            _recommendationsReceived.Add(programmer);
         }
     }
 }
