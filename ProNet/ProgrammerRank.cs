@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace ProNet
 {
     public class ProgrammerRank
     {
-        private readonly IEnumerable<IRankUpdateable> _programmers;
+        private readonly RankedProgrammers _programmers;
 
-        public ProgrammerRank(IEnumerable<IRankUpdateable> programmers)
+        public ProgrammerRank(RankedProgrammers programmers)
         {
             _programmers = programmers;
         }
@@ -20,7 +19,7 @@ namespace ProNet
                 {
                     programmer.UpdateRank();
                 }
-            } while (_programmers.Average(programmer => programmer.Rank) < 1);
+            } while (_programmers.AverageRank() < 1);
         }
     }
 }

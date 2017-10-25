@@ -45,6 +45,7 @@
     <Compile Include="PageRankedProgrammer.cs" />
     <Compile Include="ProgrammerRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RankedProgrammers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
