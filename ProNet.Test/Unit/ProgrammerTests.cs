@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace ProNet.Test.Unit
 {
     [TestFixture]
-    public class ProNet
+    public class ProgrammerTests
     {
         [Test]
         public void Should_calculate_programmer_rank_for_a_programmer_with_a_single_recommendation()
