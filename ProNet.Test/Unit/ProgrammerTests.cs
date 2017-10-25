@@ -32,6 +32,20 @@ namespace ProNet.Test.Unit
 
             Assert.That(programmer1.RecommendationsGivenCount, Is.EqualTo(1));
         }
+
+        [Test]
+        public void Should_calculate_the_share_of_page_rank()
+        {
+            var programmer1 = new Programmer("Programmer1");
+            var programmer2 = new Programmer("Programmer2");
+            var programmer3 = new Programmer("Programmer3");
+
+            programmer2.Recommends(programmer1);
+            programmer2.Recommends(programmer3);
+            programmer2.Rank = 0.4m; // hopefully this will be temporary
+
+            Assert.That(programmer2.ProgrammerRankShare, Is.EqualTo(0.2m));
+        }
     }
 
     public class Programmer
@@ -49,8 +63,13 @@ namespace ProNet.Test.Unit
         }
 
         public int RecommendationsGivenCount => _recommendationsGiven.Count;
-        public decimal Rank => _rank;
+        public decimal Rank
+        {
+            get => _rank;
+            set => _rank = value;
+        }
         public string Name => _name;
+        public decimal ProgrammerRankShare => _rank / _recommendationsGiven.Count();
 
         public void UpdateRank()
         {
