@@ -14,7 +14,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             programmer.Rank.Returns(1m);
 
-            var programmerRank = new ProNet.ProgrammerRank(new RankedProgrammers(new List<IRankUpdateable>{programmer}));
+            var programmerRank = ProgrammerRank(RankedProgrammers(programmer));
 
             programmerRank.Calculate();
 
@@ -32,7 +32,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmer1.Rank.Returns(1m);
             programmer2.Rank.Returns(2m);
 
-            var programmerRank = new ProNet.ProgrammerRank(new RankedProgrammers(new List<IRankUpdateable>{ programmer1, programmer2}));
+            var programmerRank = ProgrammerRank(RankedProgrammers(programmer1, programmer2));
 
             programmerRank.Calculate();
 
@@ -50,12 +50,22 @@ namespace ProNet.Test.Unit.ProgrammerRank
             var programmer = Substitute.For<IRankUpdateable>();
             programmer.Rank.Returns(0.5m, 1m);
 
-            var programmerRank = new ProNet.ProgrammerRank(new RankedProgrammers(new List<IRankUpdateable>{programmer}));
+            var programmerRank = ProgrammerRank(RankedProgrammers(programmer));
             programmerRank.Calculate();
 
             programmer
                 .Received(2)
                 .UpdateRank();
+        }
+
+        private static ProNet.ProgrammerRank ProgrammerRank(RankedProgrammers newRankedProgrammers)
+        {
+            return new ProNet.ProgrammerRank(newRankedProgrammers);
+        }
+
+        private static RankedProgrammers RankedProgrammers(params IRankUpdateable[] programmers)
+        {
+            return new RankedProgrammers(programmers);
         }
     }
 }
