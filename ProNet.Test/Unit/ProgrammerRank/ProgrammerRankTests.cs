@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace ProNet.Test.Unit.ProgrammerRank
@@ -20,6 +21,24 @@ namespace ProNet.Test.Unit.ProgrammerRank
                 .UpdateRank();
         }
 
+        [Test]
+        public void Should_update_rank_of_ranked_programmers()
+        {
+            var programmer1 = Substitute.For<IRankUpdateable>();
+            var programmer2 = Substitute.For<IRankUpdateable>();
+
+            var programmerRank = new ProgrammerRank(new List<IRankUpdateable>{ programmer1, programmer2});
+
+            programmerRank.Calculate();
+
+            programmer1
+                .Received()
+                .UpdateRank();
+            programmer2
+                .Received()
+                .UpdateRank();
+        }
+
         // something about a collection of rankedProgrammers
         // something about looping through that collection updating their ranks
         // something about keeping looping until the average is 1
@@ -27,6 +46,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
     public class ProgrammerRank
     {
+        private readonly List<IRankUpdateable> _programmers;
         private readonly IRankUpdateable _programmer;
 
         public ProgrammerRank(IRankUpdateable programmer)
@@ -34,9 +54,20 @@ namespace ProNet.Test.Unit.ProgrammerRank
             _programmer = programmer;
         }
 
+        public ProgrammerRank(List<IRankUpdateable> programmers)
+        {
+            _programmers = programmers;
+        }
+
         public void Calculate()
         {
-            _programmer.UpdateRank();
+            _programmer?.UpdateRank();
+
+            if (_programmers != null)
+                foreach (var programmer in _programmers)
+                {
+                    programmer.UpdateRank();
+                }
         }
     }
 }
