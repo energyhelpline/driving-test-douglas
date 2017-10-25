@@ -5,7 +5,7 @@ using System.Linq;
 namespace ProNet
 {
     [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
-    public class PageRankedProgrammer : IRankedProgrammer
+    public class PageRankedProgrammer : IRankedProgrammer, IRankUpdateable
     {
         private readonly List<IRankedProgrammer> _recommends;
         private readonly List<IRankedProgrammer> _recommendedBy;
