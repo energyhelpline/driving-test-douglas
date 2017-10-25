@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -15,7 +14,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             programmer.Rank.Returns(1m);
 
-            var programmerRank = new ProgrammerRank(new List<IRankUpdateable>{programmer});
+            var programmerRank = new ProNet.ProgrammerRank(new List<IRankUpdateable>{programmer});
 
             programmerRank.Calculate();
 
@@ -33,7 +32,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmer1.Rank.Returns(1m);
             programmer2.Rank.Returns(2m);
 
-            var programmerRank = new ProgrammerRank(new List<IRankUpdateable>{ programmer1, programmer2});
+            var programmerRank = new ProNet.ProgrammerRank(new List<IRankUpdateable>{ programmer1, programmer2});
 
             programmerRank.Calculate();
 
@@ -51,38 +50,12 @@ namespace ProNet.Test.Unit.ProgrammerRank
             var programmer = Substitute.For<IRankUpdateable>();
             programmer.Rank.Returns(0.5m, 1m);
 
-            var programmerRank = new ProgrammerRank(new List<IRankUpdateable>{programmer});
+            var programmerRank = new ProNet.ProgrammerRank(new List<IRankUpdateable>{programmer});
             programmerRank.Calculate();
 
             programmer
                 .Received(2)
                 .UpdateRank();
-        }
-    }
-
-    public class ProgrammerRank
-    {
-        private readonly List<IRankUpdateable> _programmers;
-
-        public ProgrammerRank(List<IRankUpdateable> programmers)
-        {
-            _programmers = programmers;
-        }
-
-        public void Calculate()
-        {
-            do
-            {
-                foreach (var programmer in _programmers)
-                {
-                    programmer.UpdateRank();
-                }
-            } while (AverageRankLessThan1(_programmers));
-        }
-
-        private bool AverageRankLessThan1(IEnumerable<IRankUpdateable> programmers)
-        {
-            return programmers.Average(programmer => programmer.Rank) < 1;
         }
     }
 }
