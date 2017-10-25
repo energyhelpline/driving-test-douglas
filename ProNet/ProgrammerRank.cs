@@ -5,9 +5,9 @@ namespace ProNet
 {
     public class ProgrammerRank
     {
-        private readonly List<IRankUpdateable> _programmers;
+        private readonly IEnumerable<IRankUpdateable> _programmers;
 
-        public ProgrammerRank(List<IRankUpdateable> programmers)
+        public ProgrammerRank(IEnumerable<IRankUpdateable> programmers)
         {
             _programmers = programmers;
         }
