@@ -20,12 +20,7 @@ namespace ProNet
                 {
                     programmer.UpdateRank();
                 }
-            } while (AverageRankLessThan1(_programmers));
-        }
-
-        private bool AverageRankLessThan1(IEnumerable<IRankUpdateable> programmers)
-        {
-            return programmers.Average(programmer => programmer.Rank) < 1;
+            } while (_programmers.Average(programmer => programmer.Rank) < 1);
         }
     }
 }
