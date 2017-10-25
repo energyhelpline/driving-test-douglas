@@ -11,8 +11,8 @@ namespace ProNet.Test.Unit
         [Test]
         public void Should_calculate_programmer_rank_for_a_programmer_with_a_single_recommendation()
         {
-            var programmer1 = new Programmer("Dave");
-            var programmer2 = new Programmer("Bill");
+            var programmer1 = new Programmer();
+            var programmer2 = new Programmer();
 
             programmer2.Recommends(programmer1);
 
@@ -24,9 +24,9 @@ namespace ProNet.Test.Unit
         [Test]
         public void Should_calculate_the_share_of_page_rank()
         {
-            var programmer1 = new Programmer("Programmer1");
-            var programmer2 = new Programmer("Programmer2");
-            var programmer3 = new Programmer("Programmer3");
+            var programmer1 = new Programmer();
+            var programmer2 = new Programmer();
+            var programmer3 = new Programmer();
 
             programmer2.Recommends(programmer1);
             programmer2.Recommends(programmer3);
@@ -38,13 +38,11 @@ namespace ProNet.Test.Unit
 
     public class Programmer
     {
-        private readonly string _name;
         private readonly List<Programmer> _recommendationsGiven;
         private decimal _rank;
 
-        public Programmer(string name)
+        public Programmer()
         {
-            _name = name;
             _recommendationsGiven = new List<Programmer>();
         }
 
@@ -53,7 +51,7 @@ namespace ProNet.Test.Unit
             get => _rank;
             set => _rank = value;
         }
-        public string Name => _name;
+
         public decimal ProgrammerRankShare => _rank / _recommendationsGiven.Count();
 
         public void UpdateRank()
