@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace ProNet
+﻿namespace ProNet
 {
     public class ProgrammerRank
     {
