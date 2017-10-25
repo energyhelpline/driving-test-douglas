@@ -3,16 +3,16 @@ using System.Linq;
 
 namespace ProNet
 {
-    public class PageRankedProgrammer
+    public class PageRankedProgrammer : IRankedProgrammer
     {
-        private readonly List<PageRankedProgrammer> _recommendationsGiven;
-        private readonly List<PageRankedProgrammer> _recommendationsReceived;
+        private readonly List<IRankedProgrammer> _recommendationsGiven;
+        private readonly List<IRankedProgrammer> _recommendationsReceived;
         private decimal _rank;
 
         public PageRankedProgrammer()
         {
-            _recommendationsGiven = new List<PageRankedProgrammer>();
-            _recommendationsReceived = new List<PageRankedProgrammer>();
+            _recommendationsGiven = new List<IRankedProgrammer>();
+            _recommendationsReceived = new List<IRankedProgrammer>();
         }
 
         public decimal Rank
@@ -30,15 +30,21 @@ namespace ProNet
                 .Aggregate(1m - 0.85m, (current, programmer) => current + 0.85m * programmer.ProgrammerRankShare);
         }
 
-        public void Recommends(PageRankedProgrammer programmer)
+        public void Recommends(IRankedProgrammer programmer)
         {
             _recommendationsGiven.Add(programmer);
             programmer.RecommendedBy(this);
         }
 
-        private void RecommendedBy(PageRankedProgrammer programmer)
+        public void RecommendedBy(IRankedProgrammer programmer)
         {
             _recommendationsReceived.Add(programmer);
         }
+    }
+
+    public interface IRankedProgrammer
+    {
+        void RecommendedBy(IRankedProgrammer programmer);
+        decimal ProgrammerRankShare { get; }
     }
 }
