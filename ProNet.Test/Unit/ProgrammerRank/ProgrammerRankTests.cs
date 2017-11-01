@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 
 namespace ProNet.Test.Unit.ProgrammerRank
@@ -14,9 +13,9 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             programmer.Rank.Returns(1m);
 
-            var programmerRank = ProgrammerRank(RankedProgrammers(programmer));
+            var rankedProgrammers = RankedProgrammers(programmer);
 
-            programmerRank.Calculate();
+            rankedProgrammers.Calculate();
 
             programmer
                 .Received()
@@ -32,9 +31,9 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmer1.Rank.Returns(1m);
             programmer2.Rank.Returns(1m);
 
-            var programmerRank = ProgrammerRank(RankedProgrammers(programmer1, programmer2));
+            var rankedProgrammers = RankedProgrammers(programmer1, programmer2);
 
-            programmerRank.Calculate();
+            rankedProgrammers.Calculate();
 
             programmer1
                 .Received()
@@ -50,8 +49,8 @@ namespace ProNet.Test.Unit.ProgrammerRank
             var programmer = Substitute.For<IRankUpdateable>();
             programmer.Rank.Returns(0.5m, 1m);
 
-            var programmerRank = ProgrammerRank(RankedProgrammers(programmer));
-            programmerRank.Calculate();
+            var rankedProgrammers = RankedProgrammers(programmer);
+            rankedProgrammers.Calculate();
 
             programmer
                 .Received(2)
@@ -69,17 +68,10 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             var rankedProgrammers = new RankedProgrammers(new [] {programmerA, programmerB});
 
-            var programmerRank = new ProNet.ProgrammerRank(rankedProgrammers);
-
-            programmerRank.Calculate();
+            rankedProgrammers.Calculate();
 
             Assert.That(programmerA.Rank, Is.EqualTo(1m).Within(0.00001m));
             Assert.That(programmerB.Rank, Is.EqualTo(1m).Within(0.00001m));
-        }
-
-        private static ProNet.ProgrammerRank ProgrammerRank(RankedProgrammers newRankedProgrammers)
-        {
-            return new ProNet.ProgrammerRank(newRankedProgrammers);
         }
 
         private static RankedProgrammers RankedProgrammers(params IRankUpdateable[] programmers)

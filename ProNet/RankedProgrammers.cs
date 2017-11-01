@@ -40,5 +40,12 @@ namespace ProNet
                 programmer.UpdateRank();
             }
         }
+
+        public void Calculate()
+        {
+            do
+                UpdateRanks();
+            while (1 - AverageRank() >= 0.000001m);
+        }
     }
 }
