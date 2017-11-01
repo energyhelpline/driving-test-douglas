@@ -15,9 +15,8 @@ namespace ProNet
         public void Calculate()
         {
             do
-            {
                 _programmers.UpdateRanks();
-            } while (_programmers.AverageRank() < 1);
+            while (_programmers.AverageRank() < 1);
         }
     }
 }
