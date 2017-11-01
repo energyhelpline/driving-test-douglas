@@ -3,7 +3,7 @@
 namespace ProNet.Test.Unit.ProgrammerRank
 {
     [TestFixture]
-    public class ProgrammerTests
+    public class PageRankedProgrammerTests
     {
         [Test]
         public void Should_calculate_programmer_rank_for_a_programmer_with_a_single_recommendation()
