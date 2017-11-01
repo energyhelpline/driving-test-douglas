@@ -19,7 +19,7 @@ namespace ProNet
 
             var programmers = xml
                 .Descendants("Programmer")
-                .Select(programmer => new PageRankedProgrammer(programmer.Attribute("name").Value)).ToList();
+                .Select(BuildProgrammer).ToList();
 
             foreach (var programmer in programmers)
             {
@@ -36,7 +36,17 @@ namespace ProNet
                 }
             }
 
+            return BuildProgrammers(programmers);
+        }
+
+        private static IRankCalculator BuildProgrammers(List<IRankedProgrammer> programmers)
+        {
             return new RankedProgrammers(programmers);
+        }
+
+        private static IRankedProgrammer BuildProgrammer(XElement programmer)
+        {
+            return new PageRankedProgrammer(programmer.Attribute("name").Value);
         }
     }
 }
