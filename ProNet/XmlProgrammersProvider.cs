@@ -5,23 +5,9 @@ namespace ProNet
 {
     public class XmlProgrammersProvider : IProgrammersProvider
     {
-        public IRankCalculator GetAll()
+        public IRankCalculator GetAll(IXmlLoader xmlLoaded)
         {
-            var xml = XElement.Parse(@"<?xml version=""1.0"" encoding=""utf-8"" ?>
-            <Network>
-                <Programmer name='Nick'></Programmer>
-                <Programmer name='Bill'></Programmer>
-                <Programmer name='Dave'></Programmer>
-                <Programmer name='Ed'>
-                    <Recommendations>
-                        <Recommendation>Liz</Recommendation>
-                        <Recommendation>Rick</Recommendation>
-                        <Recommendation>Bill</Recommendation>
-                    </Recommendations>
-                </Programmer>
-                <Programmer name='Liz'></Programmer>
-                <Programmer name='Rick'></Programmer>
-            </Network>");
+            var xml = xmlLoaded.Load();
 
             var programmers = xml
                 .Descendants("Programmer")
