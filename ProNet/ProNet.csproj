@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProNet.cs" />
+    <Compile Include="IRankedProgrammer.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IRankUpdater.cs" />
     <Compile Include="PageRankedProgrammer.cs" />

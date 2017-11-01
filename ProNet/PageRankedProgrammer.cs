@@ -43,10 +43,4 @@ namespace ProNet
             _recommendedBy.Add(programmer);
         }
     }
-
-    public interface IRankedProgrammer
-    {
-        void RecommendedBy(IRankedProgrammer programmer);
-        decimal ProgrammerRankShare { get; }
-    }
 }
