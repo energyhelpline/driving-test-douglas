@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
+using ProNet;
 
 namespace ProNet
 {
+    [SuppressMessage("CodeCraft.FxCop", "TT1020:MaxCollaboratorsRule", Scope = "type", Target = "ProNet.XmlProgrammersStore")]
     public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
