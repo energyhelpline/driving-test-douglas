@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace ProNet
@@ -11,16 +10,6 @@ namespace ProNet
         public RankedProgrammers(IEnumerable<IRankedProgrammer> programmers)
         {
             _programmers = programmers;
-        }
-
-        public IEnumerator<IRankedProgrammer> GetEnumerator()
-        {
-            return _programmers.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         public decimal AverageRank()

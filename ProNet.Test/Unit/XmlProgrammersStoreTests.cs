@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace ProNet.Test.Unit
 {
@@ -7,12 +6,11 @@ namespace ProNet.Test.Unit
     public class XmlProgrammersStoreTests
     {
         [Test]
-        public void Should_return_all_the_programmers_stored_as_xml()
+        public void Programmer_should_have_a_rank_of_zero_when_first_built()
         {
             var programmersStore = new XmlProgrammersStore(new HardCodedXmlLoader());
             var programmers = programmersStore.GetAll();
-            var programmerA = programmers.First();
-            Assert.That(programmerA.Name, Is.EqualTo("Nick"));
+            Assert.That(programmers.RankFor("Nick"), Is.EqualTo(0));
         }
     }
 }
