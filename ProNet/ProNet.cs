@@ -5,11 +5,12 @@ namespace ProNet
 {
     public class ProNet : IProNet
     {
-        private readonly IProgrammersProvider _programmersProvider;
+        private readonly IRankCalculator _programmers;
 
         public ProNet(IProgrammersProvider programmersProvider)
         {
-            _programmersProvider = programmersProvider;
+            _programmers = programmersProvider.GetAll();
+            _programmers.Calculate();
         }
 
         public string[] Skills(string programmer)
@@ -19,18 +20,12 @@ namespace ProNet
 
         public string[] Recommendations(string programmer)
         {
-            var programmers = _programmersProvider.GetAll();
-
-            return programmers.RecommendationsFor(programmer).ToArray();
+            return _programmers.RecommendationsFor(programmer).ToArray();
         }
 
         public double Rank(string programmer)
         {
-            var programmers = _programmersProvider.GetAll();
-
-            programmers.Calculate();
-
-            return Convert.ToDouble(programmers.RankFor(programmer));
+            return Convert.ToDouble(_programmers.RankFor(programmer));
         }
 
         public int DegreesOfSeparation(string programmer1, string programmer2)
