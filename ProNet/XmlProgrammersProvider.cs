@@ -5,13 +5,20 @@ namespace ProNet
 {
     public class XmlProgrammersProvider : IProgrammersProvider
     {
+        private readonly IXmlLoader _xmlLoader;
+
+        public XmlProgrammersProvider(IXmlLoader xmlLoader)
+        {
+            _xmlLoader = xmlLoader;
+        }
+
         public IRankCalculator GetAll()
         {
-            var xml = new HardCodedXmlLoader().Load();
+            var xml = _xmlLoader.Load();
 
             var programmers = xml
                 .Descendants("Programmer")
-                .Select(programmer => new DummyProgrammer{Name = programmer.Attribute("name").Value}).ToList();
+                .Select(programmer => new PageRankedProgrammer(programmer.Attribute("name").Value)).ToList();
 
             foreach (var programmer in programmers)
             {
@@ -27,13 +34,6 @@ namespace ProNet
                     programmer.Recommends(programmers.Single(p => p.Name == recommmendation));
                 }
             }
-
-            programmers.First().Rank = 2.63m;
-            programmers.Skip(1).First().Rank = 0.3m;
-            programmers.Skip(2).First().Rank = 0.07m;
-            programmers.Skip(3).First().Rank = 2.63m;
-            programmers.Skip(4).First().Rank = 0.3m;
-            programmers.Skip(5).First().Rank = 0.07m;
 
             return new RankedProgrammers(programmers);
         }

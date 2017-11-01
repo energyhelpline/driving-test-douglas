@@ -8,8 +8,13 @@ namespace ProNet.Test.Customer
     [TestFixture]
     public abstract class AbstractCustomerTests
     {
-        private readonly string _filename = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +
-                                            @"\ProNet.xml";
+        //private readonly string _filename = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +
+        //                                    @"\ProNet.xml";
+
+        private readonly string _filename =
+            Path.GetDirectoryName(
+                Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path)) +
+            @"\ProNet.xml";
 
         private IProNet _proNet;
 

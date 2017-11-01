@@ -9,7 +9,7 @@ namespace ProNet.Test.Unit
         [Test]
         public void Should_return_all_the_programmers_stored_as_xml()
         {
-            var programmersProvider = new XmlProgrammersProvider();
+            var programmersProvider = new XmlProgrammersProvider(new HardCodedXmlLoader());
             var programmers = programmersProvider.GetAll();
             var programmerA = programmers.First();
             Assert.That(programmerA.Name, Is.EqualTo("Nick"));

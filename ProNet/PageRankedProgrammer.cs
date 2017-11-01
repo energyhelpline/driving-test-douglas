@@ -31,7 +31,7 @@ namespace ProNet
             set => _rank = value;
         }
 
-        public string Name { get; }
+        public string Name => _name;
 
         public IEnumerable<string> Recommendations => _recommendations.Select(programmer => programmer.Name);
 
