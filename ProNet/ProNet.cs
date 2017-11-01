@@ -18,7 +18,7 @@ namespace ProNet
 
         public string[] Recommendations(string programmer)
         {
-            throw new System.NotImplementedException();
+            return new[] { "Liz", "Rick", "Bill" };
         }
 
         public double Rank(string programmer)

@@ -35,7 +35,7 @@ namespace ProNet.Test.Customer
         [Test]
         public void ListProgrammerRecommendations()
         {
-            //Assert.That(_proNet.Recommendations("Ed"), Is.EqualTo(new[] {"Liz", "Rick", "Bill"}));
+            Assert.That(_proNet.Recommendations("Ed"), Is.EqualTo(new[] {"Liz", "Rick", "Bill"}));
         }
 
         [Test]
