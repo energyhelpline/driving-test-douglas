@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ProNet
 {
-    public class RankedProgrammers : IRankUpdater, IRankCalculator
+    public class RankedProgrammers : IRankCalculator
     {
         public readonly IEnumerable<IRankedProgrammer> _programmers;
 
@@ -12,7 +12,7 @@ namespace ProNet
             _programmers = programmers;
         }
 
-        public decimal AverageRank()
+        private decimal AverageRank()
         {
             var totalRank = 0m;
             foreach (var programmer in _programmers)
@@ -22,7 +22,7 @@ namespace ProNet
             return totalRank / _programmers.Count();
         }
 
-        public void UpdateRanks()
+        private void UpdateRanks()
         {
             foreach (var programmer in _programmers)
             {

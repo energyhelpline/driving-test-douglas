@@ -45,7 +45,6 @@
     <Compile Include="IRankCalculator.cs" />
     <Compile Include="IRankedProgrammer.cs" />
     <Compile Include="IRankUpdateable.cs" />
-    <Compile Include="IRankUpdater.cs" />
     <Compile Include="IXmlLoader.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
