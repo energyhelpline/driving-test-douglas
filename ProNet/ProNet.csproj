@@ -40,11 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyProgrammer.cs" />
     <Compile Include="IProNet.cs" />
     <Compile Include="IRankedProgrammer.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IRankUpdater.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
+    <Compile Include="ProNet.cs">
+      <DependentUpon>ProNet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RankedProgrammers.cs" />
   </ItemGroup>

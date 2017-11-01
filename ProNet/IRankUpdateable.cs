@@ -4,5 +4,6 @@
     {
         void UpdateRank();
         decimal Rank { get; }
+        string Name { get; }
     }
 }

@@ -7,6 +7,7 @@ namespace ProNet
     [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
     public class PageRankedProgrammer : IRankedProgrammer, IRankUpdateable
     {
+        private readonly string _name;
         private readonly ICollection<IRankedProgrammer> _recommends;
         private readonly ICollection<IRankedProgrammer> _recommendedBy;
         private decimal _rank;
@@ -17,11 +18,20 @@ namespace ProNet
             _recommendedBy = new List<IRankedProgrammer>();
         }
 
+        public PageRankedProgrammer(string name)
+        {
+            _recommends = new List<IRankedProgrammer>();
+            _recommendedBy = new List<IRankedProgrammer>();
+            _name = name;
+        }
+
         public decimal Rank
         {
             get => _rank;
             set => _rank = value;
         }
+
+        public string Name { get; }
 
         public decimal ProgrammerRankShare => _rank / _recommends.Count();
 

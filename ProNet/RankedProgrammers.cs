@@ -47,5 +47,10 @@ namespace ProNet
                 UpdateRanks();
             while (1 - AverageRank() >= 0.000001m);
         }
+
+        public decimal RankFor(string name)
+        {
+            return _programmers.Single(programmer => programmer.Name == name).Rank;
+        }
     }
 }
