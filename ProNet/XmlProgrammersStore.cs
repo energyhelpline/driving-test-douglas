@@ -30,13 +30,18 @@ namespace ProNet
                     .Descendants("Recommendation")
                     .Select(recommendation => recommendation.Value);
 
-                foreach (var recommmendation in recommendations)
-                {
-                    programmer.Recommends(programmers.Single(p => p.Name == recommmendation));
-                }
+                AddRecommendations(recommendations, programmer, programmers);
             }
 
             return BuildProgrammers(programmers);
+        }
+
+        private static void AddRecommendations(IEnumerable<string> recommendations, IRankedProgrammer programmer, List<IRankedProgrammer> programmers)
+        {
+            foreach (var recommmendation in recommendations)
+            {
+                programmer.Recommends(programmers.Single(p => p.Name == recommmendation));
+            }
         }
 
         private static IRankCalculator BuildProgrammers(List<IRankedProgrammer> programmers)
