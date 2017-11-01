@@ -23,11 +23,11 @@ namespace ProNet
 
         public double Rank(string programmer)
         {
-            var rankedProgrammers = _programmersProvider.GetAll();
+            var programmers = _programmersProvider.GetAll();
 
-            rankedProgrammers.Calculate();
+            programmers.Calculate();
 
-            return Convert.ToDouble(rankedProgrammers.RankFor(programmer));
+            return Convert.ToDouble(programmers.RankFor(programmer));
         }
 
         public int DegreesOfSeparation(string programmer1, string programmer2)
