@@ -17,10 +17,15 @@ namespace ProNet
         {
             var xml = _xmlLoader.Load();
 
-            var programmers = xml
-                .Descendants("Programmer")
-                .Select(BuildProgrammer).ToList();
+            var programmers = RankedProgrammers(xml);
 
+            programmers = AddRecommendations(programmers, xml);
+
+            return BuildProgrammers(programmers);
+        }
+
+        private static List<IRankedProgrammer> AddRecommendations(List<IRankedProgrammer> programmers, XElement xml)
+        {
             foreach (var programmer in programmers)
             {
                 var recommendations = xml
@@ -33,7 +38,14 @@ namespace ProNet
                 AddRecommendations(recommendations, programmer, programmers);
             }
 
-            return BuildProgrammers(programmers);
+            return programmers;
+        }
+
+        private static List<IRankedProgrammer> RankedProgrammers(XElement xml)
+        {
+            return xml
+                .Descendants("Programmer")
+                .Select(BuildProgrammer).ToList();
         }
 
         private static void AddRecommendations(IEnumerable<string> recommendations, IRankedProgrammer programmer, List<IRankedProgrammer> programmers)
