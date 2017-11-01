@@ -52,5 +52,10 @@ namespace ProNet
         {
             return _programmers.Single(programmer => programmer.Name == name).Rank;
         }
+
+        public string[] RecommendationsFor(string name)
+        {
+            return new[] { "Liz", "Rick", "Bill" };
+        }
     }
 }

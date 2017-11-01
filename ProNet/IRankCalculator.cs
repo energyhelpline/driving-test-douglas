@@ -6,5 +6,6 @@ namespace ProNet
     {
         void Calculate();
         decimal RankFor(string name);
+        string[] RecommendationsFor(string name);
     }
 }

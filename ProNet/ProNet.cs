@@ -18,7 +18,9 @@ namespace ProNet
 
         public string[] Recommendations(string programmer)
         {
-            return new[] { "Liz", "Rick", "Bill" };
+            var programmers = _programmersProvider.GetAll();
+
+            return programmers.RecommendationsFor(programmer);
         }
 
         public double Rank(string programmer)
