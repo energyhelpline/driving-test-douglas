@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IProNet.cs" />
     <Compile Include="IRankUpdateable.cs" />
+    <Compile Include="IRankUpdater.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
     <Compile Include="ProgrammerRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

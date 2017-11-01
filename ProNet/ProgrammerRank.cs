@@ -4,9 +4,9 @@ namespace ProNet
 {
     public class ProgrammerRank
     {
-        private readonly RankedProgrammers _programmers;
+        private readonly IRankUpdater _programmers;
 
-        public ProgrammerRank(RankedProgrammers programmers)
+        public ProgrammerRank(IRankUpdater programmers)
         {
             _programmers = programmers;
         }
