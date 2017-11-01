@@ -1,6 +1,6 @@
 ﻿namespace ProNet
 {
-    public interface IProgrammersProvider
+    public interface IProgrammersStore
     {
         IRankCalculator GetAll();
     }

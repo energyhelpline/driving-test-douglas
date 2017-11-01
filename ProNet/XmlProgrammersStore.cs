@@ -3,11 +3,11 @@ using System.Xml.Linq;
 
 namespace ProNet
 {
-    public class XmlProgrammersProvider : IProgrammersProvider
+    public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
 
-        public XmlProgrammersProvider(IXmlLoader xmlLoader)
+        public XmlProgrammersStore(IXmlLoader xmlLoader)
         {
             _xmlLoader = xmlLoader;
         }

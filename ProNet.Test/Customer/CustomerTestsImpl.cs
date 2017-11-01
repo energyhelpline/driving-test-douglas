@@ -14,7 +14,7 @@ namespace ProNet.Test.Customer
         {
             // load your implementation here
 
-            return new ProNet(new XmlProgrammersProvider(new FileXmlLoader(filename)));
+            return new ProNet(new XmlProgrammersStore(new FileXmlLoader(filename)));
         }
     }
 }

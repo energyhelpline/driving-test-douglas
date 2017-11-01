@@ -7,9 +7,9 @@ namespace ProNet
     {
         private readonly IRankCalculator _programmers;
 
-        public ProNet(IProgrammersProvider programmersProvider)
+        public ProNet(IProgrammersStore programmersStore)
         {
-            _programmers = programmersProvider.GetAll();
+            _programmers = programmersStore.GetAll();
             _programmers.Calculate();
         }
 
