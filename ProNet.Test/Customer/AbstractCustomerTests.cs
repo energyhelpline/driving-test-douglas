@@ -41,7 +41,7 @@ namespace ProNet.Test.Customer
         [Test]
         public void GetProgrammerRank()
         {
-            //Assert.That(_proNet.Rank("Nick"), Is.EqualTo(2.63).Within(0.01));
+            Assert.That(_proNet.Rank("Nick"), Is.EqualTo(2.63).Within(0.01));
         }
 
         [Test]
