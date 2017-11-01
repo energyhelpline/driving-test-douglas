@@ -19,14 +19,14 @@ namespace ProNet
 
         public string[] Recommendations(string programmer)
         {
-            var programmers = _programmersProvider.GetAll(new HardCodedXmlLoader());
+            var programmers = _programmersProvider.GetAll();
 
             return programmers.RecommendationsFor(programmer).ToArray();
         }
 
         public double Rank(string programmer)
         {
-            var programmers = _programmersProvider.GetAll(new HardCodedXmlLoader());
+            var programmers = _programmersProvider.GetAll();
 
             programmers.Calculate();
 

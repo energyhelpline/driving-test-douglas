@@ -5,9 +5,9 @@ namespace ProNet
 {
     public class XmlProgrammersProvider : IProgrammersProvider
     {
-        public IRankCalculator GetAll(IXmlLoader xmlLoaded)
+        public IRankCalculator GetAll()
         {
-            var xml = xmlLoaded.Load();
+            var xml = new HardCodedXmlLoader().Load();
 
             var programmers = xml
                 .Descendants("Programmer")

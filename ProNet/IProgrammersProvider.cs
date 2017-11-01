@@ -2,6 +2,6 @@
 {
     public interface IProgrammersProvider
     {
-        IRankCalculator GetAll(IXmlLoader xmlLoaded);
+        IRankCalculator GetAll();
     }
 }
