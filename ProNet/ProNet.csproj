@@ -48,7 +48,7 @@
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IRankUpdater.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
-    <Compile Include="ProgrammersProvider.cs" />
+    <Compile Include="XmlProgrammersProvider.cs" />
     <Compile Include="ProNet.cs">
       <DependentUpon>ProNet.xsd</DependentUpon>
     </Compile>

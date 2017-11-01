@@ -1,6 +1,6 @@
 ﻿namespace ProNet
 {
-    public class ProgrammersProvider : IProgrammersProvider
+    public class XmlProgrammersProvider : IProgrammersProvider
     {
         public IRankCalculator GetAll()
         {
