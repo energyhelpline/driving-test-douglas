@@ -13,7 +13,7 @@ namespace ProNet.Test.Customer
         protected override IProNet LoadProNet(string filename)
         {
             // load your implementation here
-            return new ProNetStub();
+            return new ProNet(new XmlProgrammersProvider());
         }
     }
 }
