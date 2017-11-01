@@ -25,7 +25,20 @@ namespace ProNet
 
         public decimal AverageRank()
         {
-            return _programmers.Average(programmer => programmer.Rank);
+            var totalRank = 0m;
+            foreach (var programmer in _programmers)
+            {
+                totalRank += programmer.Rank;
+            }
+            return totalRank / _programmers.Count();
+        }
+
+        public void UpdateRanks()
+        {
+            foreach (var programmer in _programmers)
+            {
+                programmer.UpdateRank();
+            }
         }
     }
 }

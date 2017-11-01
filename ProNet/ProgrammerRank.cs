@@ -1,4 +1,6 @@
-﻿namespace ProNet
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ProNet
 {
     public class ProgrammerRank
     {
@@ -9,14 +11,12 @@
             _programmers = programmers;
         }
 
+        [SuppressMessage("CodeCraft.FxCop", "TT1012:FeatureEnvyRule")]
         public void Calculate()
         {
             do
             {
-                foreach (var programmer in _programmers)
-                {
-                    programmer.UpdateRank();
-                }
+                _programmers.UpdateRanks();
             } while (_programmers.AverageRank() < 1);
         }
     }
