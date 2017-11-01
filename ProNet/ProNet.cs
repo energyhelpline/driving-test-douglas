@@ -4,6 +4,13 @@ namespace ProNet
 {
     public class ProNet : IProNet
     {
+        private readonly IProgrammersProvider _programmersProvider;
+
+        public ProNet(IProgrammersProvider programmersProvider)
+        {
+            _programmersProvider = programmersProvider;
+        }
+
         public string[] Skills(string programmer)
         {
             throw new System.NotImplementedException();
@@ -16,16 +23,7 @@ namespace ProNet
 
         public double Rank(string programmer)
         {
-            var programmer1 = new DummyProgrammer();
-            var programmer2 = new DummyProgrammer();
-            var programmer3 = new DummyProgrammer();
-
-            programmer1.Rank = 2.63m;
-            programmer1.Name = "Nick";
-            programmer2.Rank = 0.3m;
-            programmer3.Rank = 0.07m;
-
-            var rankedProgrammers = new RankedProgrammers(new []{programmer1, programmer2, programmer3});
+            var rankedProgrammers = _programmersProvider.GetAll();
 
             rankedProgrammers.Calculate();
 

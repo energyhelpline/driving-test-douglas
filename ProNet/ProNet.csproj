@@ -41,11 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DummyProgrammer.cs" />
+    <Compile Include="IProgrammersProvider.cs" />
     <Compile Include="IProNet.cs" />
+    <Compile Include="IRankCalculator.cs" />
     <Compile Include="IRankedProgrammer.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IRankUpdater.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
+    <Compile Include="ProgrammersProvider.cs" />
     <Compile Include="ProNet.cs">
       <DependentUpon>ProNet.xsd</DependentUpon>
     </Compile>
