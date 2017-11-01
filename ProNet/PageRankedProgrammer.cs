@@ -8,19 +8,19 @@ namespace ProNet
     public class PageRankedProgrammer : IRankedProgrammer, IRankUpdateable
     {
         private readonly string _name;
-        private readonly ICollection<IRankedProgrammer> _recommends;
+        private readonly ICollection<IRankedProgrammer> _recommendations;
         private readonly ICollection<IRankedProgrammer> _recommendedBy;
         private decimal _rank;
 
         public PageRankedProgrammer()
         {
-            _recommends = new List<IRankedProgrammer>();
+            _recommendations = new List<IRankedProgrammer>();
             _recommendedBy = new List<IRankedProgrammer>();
         }
 
         public PageRankedProgrammer(string name)
         {
-            _recommends = new List<IRankedProgrammer>();
+            _recommendations = new List<IRankedProgrammer>();
             _recommendedBy = new List<IRankedProgrammer>();
             _name = name;
         }
@@ -33,7 +33,9 @@ namespace ProNet
 
         public string Name { get; }
 
-        public decimal ProgrammerRankShare => _rank / _recommends.Count();
+        public IEnumerable<string> Recommendations => _recommendations.Select(programmer => programmer.Name);
+
+        public decimal ProgrammerRankShare => _rank / _recommendations.Count();
 
         public void UpdateRank()
         {
@@ -44,7 +46,7 @@ namespace ProNet
 
         public void Recommends(IRankedProgrammer programmer)
         {
-            _recommends.Add(programmer);
+            _recommendations.Add(programmer);
             programmer.RecommendedBy(this);
         }
 

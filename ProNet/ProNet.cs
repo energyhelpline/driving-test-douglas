@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ProNet
 {
@@ -20,7 +21,7 @@ namespace ProNet
         {
             var programmers = _programmersProvider.GetAll();
 
-            return programmers.RecommendationsFor(programmer);
+            return programmers.RecommendationsFor(programmer).ToArray();
         }
 
         public double Rank(string programmer)
