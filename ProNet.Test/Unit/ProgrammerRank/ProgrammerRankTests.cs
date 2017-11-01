@@ -30,7 +30,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             var programmer2 = Substitute.For<IRankUpdateable>();
 
             programmer1.Rank.Returns(1m);
-            programmer2.Rank.Returns(2m);
+            programmer2.Rank.Returns(1m);
 
             var programmerRank = ProgrammerRank(RankedProgrammers(programmer1, programmer2));
 
@@ -56,6 +56,25 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmer
                 .Received(2)
                 .UpdateRank();
+        }
+
+        [Test]
+        public void Should_calculate_programmer_rank_shown_in_example_1()
+        {
+            var programmerA = new PageRankedProgrammer();
+            var programmerB = new PageRankedProgrammer();
+
+            programmerA.Recommends(programmerB);
+            programmerB.Recommends(programmerA);
+
+            var rankedProgrammers = new RankedProgrammers(new [] {programmerA, programmerB});
+
+            var programmerRank = new ProNet.ProgrammerRank(rankedProgrammers);
+
+            programmerRank.Calculate();
+
+            Assert.That(programmerA.Rank, Is.EqualTo(1m).Within(0.00001m));
+            Assert.That(programmerB.Rank, Is.EqualTo(1m).Within(0.00001m));
         }
 
         private static ProNet.ProgrammerRank ProgrammerRank(RankedProgrammers newRankedProgrammers)

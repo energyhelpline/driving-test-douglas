@@ -16,7 +16,7 @@ namespace ProNet
         {
             do
                 _programmers.UpdateRanks();
-            while (_programmers.AverageRank() < 1);
+            while (1 - _programmers.AverageRank() >= 0.000001m);
         }
     }
 }
