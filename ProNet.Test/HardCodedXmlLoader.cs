@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace ProNet
+namespace ProNet.Test
 {
     public class HardCodedXmlLoader : IXmlLoader
     {

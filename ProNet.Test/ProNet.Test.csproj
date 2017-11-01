@@ -48,6 +48,7 @@
     <Compile Include="Customer\CustomerTestsImpl.cs" />
     <Compile Include="Customer\AbstractCustomerTests.cs" />
     <Compile Include="Customer\FileXmlLoader.cs" />
+    <Compile Include="HardCodedXmlLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\XmlProgrammersProviderTests.cs" />
     <Compile Include="Unit\ProgrammerRank\ProgrammerRankTests.cs" />
