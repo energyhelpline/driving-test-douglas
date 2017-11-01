@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ProNet
 {
-    public class RankedProgrammers : IEnumerable<IRankUpdateable>, IRankUpdater, IRankCalculator
+    public class RankedProgrammers : IRankUpdater, IRankCalculator
     {
         public readonly IEnumerable<IRankUpdateable> _programmers;
 
