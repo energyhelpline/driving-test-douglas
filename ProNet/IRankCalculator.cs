@@ -2,7 +2,7 @@
 
 namespace ProNet
 {
-    public interface IRankCalculator : IEnumerable<IRankUpdateable>
+    public interface IRankCalculator : IEnumerable<IRankedProgrammer>
     {
         void Calculate();
         decimal RankFor(string name);

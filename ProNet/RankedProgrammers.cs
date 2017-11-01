@@ -6,14 +6,14 @@ namespace ProNet
 {
     public class RankedProgrammers : IRankUpdater, IRankCalculator
     {
-        public readonly IEnumerable<IRankUpdateable> _programmers;
+        public readonly IEnumerable<IRankedProgrammer> _programmers;
 
-        public RankedProgrammers(IEnumerable<IRankUpdateable> programmers)
+        public RankedProgrammers(IEnumerable<IRankedProgrammer> programmers)
         {
             _programmers = programmers;
         }
 
-        public IEnumerator<IRankUpdateable> GetEnumerator()
+        public IEnumerator<IRankedProgrammer> GetEnumerator()
         {
             return _programmers.GetEnumerator();
         }
