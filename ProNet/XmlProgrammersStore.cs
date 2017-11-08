@@ -19,7 +19,7 @@ namespace ProNet
 
         public IRankCalculator GetAll()
         {
-            var recommendedProgrammers = _xmlLoader.Load()
+            var programmers = _xmlLoader.Load()
                 .Descendants("Programmer")
                 .Select(programmer => programmer.Attribute("name").Value )
                 .Select(programmer => new {
@@ -32,7 +32,7 @@ namespace ProNet
                         .Select(recommendation => recommendation.Value)})
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
 
-            return _programmersBuilder.BuildProgrammers(recommendedProgrammers);
+            return _programmersBuilder.BuildProgrammers(programmers);
         }
     }
 }
