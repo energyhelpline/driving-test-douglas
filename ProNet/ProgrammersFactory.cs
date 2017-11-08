@@ -5,12 +5,10 @@ namespace ProNet
 {
     public class ProgrammersFactory : IProgrammersFactory
     {
-        private readonly IRecommendationAdder _recommendationAdder;
         private readonly IProgrammerFactory _programmerFactory;
 
-        public ProgrammersFactory(IRecommendationAdder recommendationAdder, IProgrammerFactory programmerFactory)
+        public ProgrammersFactory(IProgrammerFactory programmerFactory)
         {
-            _recommendationAdder = recommendationAdder;
             _programmerFactory = programmerFactory;
         }
 
@@ -22,9 +20,25 @@ namespace ProNet
 
             var programmers = new Programmers(listOfProgrammers);
 
-            _recommendationAdder.AddRecommendations(programmers, rawProgrammer);
+            return AddRecommendations(programmers, rawProgrammer);
+        }
+
+        private IProgrammers AddRecommendations(IProgrammers programmers, IReadOnlyDictionary<string, IEnumerable<string>> recommenders)
+        {
+            foreach (var recommender in recommenders)
+            {
+                AddRecommendations(programmers, recommender.Key, recommenders[recommender.Key]);
+            }
 
             return programmers;
+        }
+
+        private static void AddRecommendations(IProgrammers programmers, string recommender, IEnumerable<string> recommendations)
+        {
+            foreach (var recommendation in recommendations)
+            {
+                programmers.AddRecommendation(recommender, recommendation);
+            }
         }
     }
 }
