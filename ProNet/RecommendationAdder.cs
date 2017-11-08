@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace ProNet
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeCraft.FxCop", "TT1020:MaxCollaboratorsRule")]
     public class RecommendationAdder : IRecommendationAdder
     {
         private readonly IProgrammerFactory _programmerFactory;
