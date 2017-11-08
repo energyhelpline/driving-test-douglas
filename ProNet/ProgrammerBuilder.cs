@@ -2,7 +2,7 @@
 
 namespace ProNet
 {
-    public class RankedProgrammerBuilder : IRankedProgrammerBuilder
+    public class ProgrammerBuilder : IProgrammerBuilder
     {
         public IProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
         {
