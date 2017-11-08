@@ -5,10 +5,10 @@ namespace ProNet
 {
     public class ProgrammersFactory : IProgrammersFactory
     {
-        private readonly RecommendationAdder _recommendationAdder;
-        private readonly ProgrammerFactory _programmerFactory;
+        private readonly IRecommendationAdder _recommendationAdder;
+        private readonly IProgrammerFactory _programmerFactory;
 
-        public ProgrammersFactory(RecommendationAdder recommendationAdder, ProgrammerFactory programmerFactory)
+        public ProgrammersFactory(IRecommendationAdder recommendationAdder, IProgrammerFactory programmerFactory)
         {
             _recommendationAdder = recommendationAdder;
             _programmerFactory = programmerFactory;
