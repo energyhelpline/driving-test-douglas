@@ -5,7 +5,6 @@ using System.Xml.Linq;
 
 namespace ProNet
 {
-    [SuppressMessage("CodeCraft.FxCop", "TT1020:MaxCollaboratorsRule", Scope = "type", Target = "ProNet.XmlProgrammersStore")]
     public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
