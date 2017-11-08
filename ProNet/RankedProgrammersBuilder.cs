@@ -9,17 +9,12 @@ namespace ProNet
     {
         public RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
-            var programmers = GetDictionaryOfPageRankedProgrammers(programmerDictionary);
+            var programmers = programmerDictionary
+                .ToDictionary(programmer => programmer.Key, BuildProgrammer);
 
             RecommendProgrammers(programmerDictionary, programmers);
 
             return new RankedProgrammers(programmers.Values);
-        }
-
-        private static IReadOnlyDictionary<string, PageRankedProgrammer> GetDictionaryOfPageRankedProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
-        {
-            return programmerDictionary
-                .ToDictionary(programmer => programmer.Key, BuildProgrammer);
         }
 
         private static PageRankedProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
