@@ -15,7 +15,7 @@ namespace ProNet
         public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> rawProgrammers)
         {
             var listOfProgrammers = rawProgrammers
-                .Select(programmer => _programmerFactory.BuildProgrammer(programmer))
+                .Select(programmer => _programmerFactory.BuildProgrammer(programmer.Key))
                 .ToList();
 
             var programmers = new Programmers(listOfProgrammers);

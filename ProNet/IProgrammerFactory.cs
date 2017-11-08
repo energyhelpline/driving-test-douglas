@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ProNet
+﻿namespace ProNet
 {
     public interface IProgrammerFactory
     {
-        IProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer);
+        IProgrammer BuildProgrammer(string name);
     }
 }
