@@ -46,5 +46,15 @@ namespace ProNet
         {
             return _programmers.Single(programmer => programmer.Name == name).Recommendations;
         }
+
+        public void AddRecommendation(string recommender, string recommendation)
+        {
+            GetByName(recommender).Recommends(GetByName(recommendation));
+        }
+
+        private IProgrammer GetByName(string name)
+        {
+            return _programmers.Single(programmer => programmer.Name == name);
+        }
     }
 }

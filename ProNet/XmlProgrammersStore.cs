@@ -7,21 +7,21 @@ namespace ProNet
     public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
-        private readonly IRecommendationAdder _recommendationAdder;
+        private readonly IProgrammersFactory _programmersFactory;
 
-        public XmlProgrammersStore(IXmlLoader xmlLoader, IRecommendationAdder recommendationAdder)
+        public XmlProgrammersStore(IXmlLoader xmlLoader, IProgrammersFactory programmersFactory)
         {
             _xmlLoader = xmlLoader;
-            _recommendationAdder = recommendationAdder;
+            _programmersFactory = programmersFactory;
         }
 
         public IProgrammers GetAll()
         {
             var programmerNames = GetProgrammerNames();
 
-            var programmers = GetProgrammers(programmerNames);
+            var recommendations = GetProgrammers(programmerNames);
 
-            return _recommendationAdder.AddRecommendations(programmers);
+            return _programmersFactory.BuildProgrammers(recommendations);
         }
 
         private Dictionary<string, IEnumerable<string>> GetProgrammers(IEnumerable<string> programmerNames)

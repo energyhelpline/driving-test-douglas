@@ -8,5 +8,10 @@ namespace ProNet
         {
             return new PageProgrammer(programmer.Key);
         }
+
+        public IProgrammer BuildProgrammer(string name)
+        {
+            return new PageProgrammer(name);
+        }
     }
 }

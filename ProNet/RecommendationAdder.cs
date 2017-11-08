@@ -1,44 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace ProNet
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeCraft.FxCop", "TT1020:MaxCollaboratorsRule")]
     public class RecommendationAdder : IRecommendationAdder
     {
-        private readonly IProgrammerFactory _programmerFactory;
-        private readonly IProgrammersFactory _programmersFactory;
-
-        public RecommendationAdder(IProgrammerFactory programmerFactory, IProgrammersFactory programmersFactory)
+        public IProgrammers AddRecommendations(IProgrammers programmers, IReadOnlyDictionary<string, IEnumerable<string>> recommenders)
         {
-            _programmerFactory = programmerFactory;
-            _programmersFactory = programmersFactory;
-        }
-
-        public IProgrammers AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
-        {
-            var programmers = programmerDictionary
-                .ToDictionary(programmer => programmer.Key, _programmerFactory.BuildProgrammer);
-
-            ThisIsAVeryLongMethodNameRecommendProgrammers(programmerDictionary, programmers);
-
-            return _programmersFactory.BuildProgrammers(programmers);
-        }
-
-        private static void ThisIsAVeryLongMethodNameRecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IProgrammer> programmers)
-        {
-            foreach (var pageRankedProgrammer in programmers.Values)
+            foreach (var recommender in recommenders)
             {
-                RecommendProgrammer(pageRankedProgrammer, programmers, programmerDictionary[pageRankedProgrammer.Name]);
+                foreach (var recommendation in recommenders[recommender.Key])
+                {
+                    programmers.AddRecommendation(recommender.Key, recommendation);
+                }
             }
-        }
 
-        private static void RecommendProgrammer(IProgrammer pageProgrammer, IReadOnlyDictionary<string, IProgrammer> programmers, IEnumerable<string> recommendations)
-        {
-            foreach (var recommendation in recommendations)
-            {
-                pageProgrammer.Recommends(programmers[recommendation]);
-            }
+            return programmers;
         }
     }
 }
