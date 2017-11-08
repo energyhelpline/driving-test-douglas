@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace ProNet
 {
-    [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
     public class Programmer : IProgrammer
     {
         private readonly string _name;
