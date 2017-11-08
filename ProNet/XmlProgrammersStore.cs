@@ -7,12 +7,12 @@ namespace ProNet
     public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
-        private readonly IProgrammersBuilder _programmersBuilder;
+        private readonly IRecommendationAdder _recommendationAdder;
 
-        public XmlProgrammersStore(IXmlLoader xmlLoader, IProgrammersBuilder programmersBuilder)
+        public XmlProgrammersStore(IXmlLoader xmlLoader, IRecommendationAdder recommendationAdder)
         {
             _xmlLoader = xmlLoader;
-            _programmersBuilder = programmersBuilder;
+            _recommendationAdder = recommendationAdder;
         }
 
         public IRankCalculator GetAll()
@@ -21,7 +21,7 @@ namespace ProNet
 
             var programmers = GetProgrammers(programmerNames);
 
-            return _programmersBuilder.BuildProgrammers(programmers);
+            return _recommendationAdder.AddRecommendations(programmers);
         }
 
         private Dictionary<string, IEnumerable<string>> GetProgrammers(IEnumerable<string> programmerNames)

@@ -3,16 +3,16 @@ using System.Linq;
 
 namespace ProNet
 {
-    public class ProgrammersBuilder : IProgrammersBuilder
+    public class RecommendationAdder : IRecommendationAdder
     {
         private readonly IProgrammerBuilder _programmerBuilder;
 
-        public ProgrammersBuilder(IProgrammerBuilder programmerBuilder)
+        public RecommendationAdder(IProgrammerBuilder programmerBuilder)
         {
             _programmerBuilder = programmerBuilder;
         }
 
-        public Programmers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
+        public Programmers AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             var programmers = programmerDictionary
                 .ToDictionary(programmer => programmer.Key, _programmerBuilder.BuildProgrammer);
