@@ -6,10 +6,12 @@ namespace ProNet
     public class RecommendationAdder : IRecommendationAdder
     {
         private readonly IProgrammerBuilder _programmerBuilder;
+        private readonly IProgrammersBuilder _programmersBuilder;
 
-        public RecommendationAdder(IProgrammerBuilder programmerBuilder)
+        public RecommendationAdder(IProgrammerBuilder programmerBuilder, IProgrammersBuilder programmersBuilder)
         {
             _programmerBuilder = programmerBuilder;
+            _programmersBuilder = programmersBuilder;
         }
 
         public Programmers AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
@@ -19,7 +21,7 @@ namespace ProNet
 
             ThisIsAVeryLongMethodNameRecommendProgrammers(programmerDictionary, programmers);
 
-            return new Programmers(programmers.Values);
+            return _programmersBuilder.BuildProgrammers(programmers);
         }
 
         private static void ThisIsAVeryLongMethodNameRecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IProgrammer> programmers)
