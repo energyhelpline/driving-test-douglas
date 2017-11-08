@@ -2,7 +2,7 @@
 
 namespace ProNet
 {
-    public class ProgrammerBuilder : IProgrammerBuilder
+    public class ProgrammerFactory : IProgrammerFactory
     {
         public IProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
         {

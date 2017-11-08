@@ -2,7 +2,7 @@
 
 namespace ProNet
 {
-    public class ProgrammersBuilder : IProgrammersBuilder
+    public class ProgrammersFactory : IProgrammersFactory
     {
         public Programmers BuildProgrammers(Dictionary<string, IProgrammer> programmers)
         {

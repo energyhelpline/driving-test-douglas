@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProgrammerBuilder.cs" />
-    <Compile Include="IProgrammersBuilder.cs" />
+    <Compile Include="IProgrammerFactory.cs" />
+    <Compile Include="IProgrammersFactory.cs" />
     <Compile Include="IRecommendationAdder.cs" />
     <Compile Include="IProgrammersStore.cs" />
     <Compile Include="IProNet.cs" />
@@ -50,8 +50,8 @@
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
     <Compile Include="PageProgrammer.cs" />
-    <Compile Include="ProgrammerBuilder.cs" />
-    <Compile Include="ProgrammersBuilder.cs" />
+    <Compile Include="ProgrammerFactory.cs" />
+    <Compile Include="ProgrammersFactory.cs" />
     <Compile Include="RecommendationAdder.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
     <Compile Include="ProNet.cs">

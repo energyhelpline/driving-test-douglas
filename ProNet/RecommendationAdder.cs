@@ -5,23 +5,23 @@ namespace ProNet
 {
     public class RecommendationAdder : IRecommendationAdder
     {
-        private readonly IProgrammerBuilder _programmerBuilder;
-        private readonly IProgrammersBuilder _programmersBuilder;
+        private readonly IProgrammerFactory _programmerFactory;
+        private readonly IProgrammersFactory _programmersFactory;
 
-        public RecommendationAdder(IProgrammerBuilder programmerBuilder, IProgrammersBuilder programmersBuilder)
+        public RecommendationAdder(IProgrammerFactory programmerFactory, IProgrammersFactory programmersFactory)
         {
-            _programmerBuilder = programmerBuilder;
-            _programmersBuilder = programmersBuilder;
+            _programmerFactory = programmerFactory;
+            _programmersFactory = programmersFactory;
         }
 
         public Programmers AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             var programmers = programmerDictionary
-                .ToDictionary(programmer => programmer.Key, _programmerBuilder.BuildProgrammer);
+                .ToDictionary(programmer => programmer.Key, _programmerFactory.BuildProgrammer);
 
             ThisIsAVeryLongMethodNameRecommendProgrammers(programmerDictionary, programmers);
 
-            return _programmersBuilder.BuildProgrammers(programmers);
+            return _programmersFactory.BuildProgrammers(programmers);
         }
 
         private static void ThisIsAVeryLongMethodNameRecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IProgrammer> programmers)

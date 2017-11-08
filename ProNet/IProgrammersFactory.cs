@@ -2,7 +2,7 @@
 
 namespace ProNet
 {
-    public interface IProgrammersBuilder
+    public interface IProgrammersFactory
     {
         Programmers BuildProgrammers(Dictionary<string, IProgrammer> programmers);
     }
