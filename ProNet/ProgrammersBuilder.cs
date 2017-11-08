@@ -10,7 +10,7 @@ namespace ProNet
         public Programmers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IProgrammerBuilder programmerBuilder)
         {
             var programmers = programmerDictionary
-                .ToDictionary(programmer => programmer.Key, programmer => programmerBuilder.BuildProgrammer(programmer));
+                .ToDictionary(programmer => programmer.Key, programmerBuilder.BuildProgrammer);
 
             RecommendProgrammers(programmerDictionary, programmers);
 
