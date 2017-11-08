@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IProgrammersBuilder.cs" />
     <Compile Include="IProgrammersStore.cs" />
     <Compile Include="IProNet.cs" />
     <Compile Include="IRankCalculator.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
+    <Compile Include="RankedProgrammersBuilder.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
     <Compile Include="ProNet.cs">
       <DependentUpon>ProNet.xsd</DependentUpon>

@@ -9,10 +9,12 @@ namespace ProNet
     public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
+        private readonly IProgrammersBuilder _rankedProgrammersBuilder;
 
         public XmlProgrammersStore(IXmlLoader xmlLoader)
         {
             _xmlLoader = xmlLoader;
+            _rankedProgrammersBuilder = new RankedProgrammersBuilder();
         }
 
         public IRankCalculator GetAll()
@@ -23,7 +25,7 @@ namespace ProNet
 
             var recommendedProgrammers = AddRecommendations(programmers, xml);
 
-            return BuildProgrammers(recommendedProgrammers);
+            return _rankedProgrammersBuilder.BuildProgrammers(recommendedProgrammers);
         }
 
         private static IDictionary<string, IEnumerable<string>> AddRecommendations(IEnumerable<string> programmers, XElement xml)
@@ -45,27 +47,6 @@ namespace ProNet
             return xml
                 .Descendants("Programmer")
                 .Select(programmer => programmer.Attribute("name").Value );
-        }
-
-        private static IRankCalculator BuildProgrammers(IDictionary<string, IEnumerable<string>> programmers)
-        {
-            var pageRankedProgrammers = new Dictionary<string, PageRankedProgrammer>();
-
-            foreach (var programmer in programmers)
-            {
-                pageRankedProgrammers.Add(programmer.Key, new PageRankedProgrammer(programmer.Key));
-            }
-
-            foreach (var pageRankedProgrammer in pageRankedProgrammers.Values)
-            {
-                var recommendationNames = programmers[pageRankedProgrammer.Name];
-                foreach (var recommendationName in recommendationNames)
-                {
-                    pageRankedProgrammer.Recommends(pageRankedProgrammers[recommendationName]);
-                }
-            }
-
-            return new RankedProgrammers(pageRankedProgrammers.Values);
         }
     }
 }
