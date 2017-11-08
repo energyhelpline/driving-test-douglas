@@ -5,7 +5,7 @@ namespace ProNet
 {
     public class RankedProgrammersBuilder : IProgrammersBuilder
     {
-        public IRankCalculator BuildProgrammers(IDictionary<string, IEnumerable<string>> programmerDictionary)
+        public IRankCalculator BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             var programmers = GetDictionaryOfPageRankedProgrammers(programmerDictionary);
 
@@ -14,13 +14,13 @@ namespace ProNet
             return new RankedProgrammers(programmers.Values);
         }
 
-        private static Dictionary<string, PageRankedProgrammer> GetDictionaryOfPageRankedProgrammers(IDictionary<string, IEnumerable<string>> programmerDictionary)
+        private static IReadOnlyDictionary<string, PageRankedProgrammer> GetDictionaryOfPageRankedProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             return programmerDictionary
                 .ToDictionary(programmer => programmer.Key, programmer => new PageRankedProgrammer(programmer.Key));
         }
 
-        private static void PopulateRecommendations(IDictionary<string, IEnumerable<string>> programmerDictionary, Dictionary<string, PageRankedProgrammer> programmers)
+        private static void PopulateRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, PageRankedProgrammer> programmers)
         {
             foreach (var pageRankedProgrammer in programmers.Values)
             {
@@ -28,7 +28,7 @@ namespace ProNet
             }
         }
 
-        private static void AddRecommendationsToProgrammer(PageRankedProgrammer pageRankedProgrammer, Dictionary<string, PageRankedProgrammer> programmers, IEnumerable<string> recommendations)
+        private static void AddRecommendationsToProgrammer(IRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, PageRankedProgrammer> programmers, IEnumerable<string> recommendations)
         {
             foreach (var recommendation in recommendations)
             {
