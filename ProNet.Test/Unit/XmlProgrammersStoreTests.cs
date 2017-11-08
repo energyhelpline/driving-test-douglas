@@ -8,7 +8,7 @@ namespace ProNet.Test.Unit
         [Test]
         public void Programmer_should_have_a_rank_of_zero_when_first_built()
         {
-            var programmersStore = new XmlProgrammersStore(new HardCodedXmlLoader());
+            var programmersStore = new XmlProgrammersStore(new HardCodedXmlLoader(), new RankedProgrammersBuilder());
             var programmers = programmersStore.GetAll();
             Assert.That(programmers.RankFor("Nick"), Is.EqualTo(0));
         }

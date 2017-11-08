@@ -11,10 +11,10 @@ namespace ProNet
         private readonly IXmlLoader _xmlLoader;
         private readonly IProgrammersBuilder _rankedProgrammersBuilder;
 
-        public XmlProgrammersStore(IXmlLoader xmlLoader)
+        public XmlProgrammersStore(IXmlLoader xmlLoader, IProgrammersBuilder rankedProgrammersBuilder)
         {
             _xmlLoader = xmlLoader;
-            _rankedProgrammersBuilder = new RankedProgrammersBuilder();
+            _rankedProgrammersBuilder = rankedProgrammersBuilder;
         }
 
         public IRankCalculator GetAll()
