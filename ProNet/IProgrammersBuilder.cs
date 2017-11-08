@@ -4,6 +4,6 @@ namespace ProNet
 {
     public interface IProgrammersBuilder
     {
-        RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmers, IPageRankedProgrammerBuilder pageRankedProgrammerBuilder);
+        RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmers, IRankedProgrammerBuilder rankedProgrammerBuilder);
     }
 }

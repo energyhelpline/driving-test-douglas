@@ -7,10 +7,10 @@ namespace ProNet
     [SuppressMessage("CodeCraft.FxCop", "TT1011:IdentifierLengthRule")]
     public class RankedProgrammersBuilder : IProgrammersBuilder
     {
-        public RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IPageRankedProgrammerBuilder pageRankedProgrammerBuilder)
+        public RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IRankedProgrammerBuilder rankedProgrammerBuilder)
         {
             var programmers = programmerDictionary
-                .ToDictionary(programmer => programmer.Key, programmer => pageRankedProgrammerBuilder.BuildProgrammer(programmer));
+                .ToDictionary(programmer => programmer.Key, programmer => rankedProgrammerBuilder.BuildProgrammer(programmer));
 
             RecommendProgrammers(programmerDictionary, programmers);
 

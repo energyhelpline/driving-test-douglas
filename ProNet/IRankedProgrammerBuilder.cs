@@ -2,7 +2,7 @@
 
 namespace ProNet
 {
-    public interface IPageRankedProgrammerBuilder
+    public interface IRankedProgrammerBuilder
     {
         IRankedProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer);
     }

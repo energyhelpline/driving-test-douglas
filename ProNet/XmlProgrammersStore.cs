@@ -22,7 +22,7 @@ namespace ProNet
 
             var programmers = GetProgrammers(programmerNames);
 
-            return _programmersBuilder.BuildProgrammers(programmers, new PageRankedProgrammerBuilder());
+            return _programmersBuilder.BuildProgrammers(programmers, new RankedProgrammerBuilder());
         }
 
         private Dictionary<string, IEnumerable<string>> GetProgrammers(IEnumerable<string> programmerNames)

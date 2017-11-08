@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPageRankedProgrammerBuilder.cs" />
+    <Compile Include="IRankedProgrammerBuilder.cs" />
     <Compile Include="IProgrammersBuilder.cs" />
     <Compile Include="IProgrammersStore.cs" />
     <Compile Include="IProNet.cs" />
@@ -49,7 +49,7 @@
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
     <Compile Include="PageRankedProgrammer.cs" />
-    <Compile Include="PageRankedProgrammerBuilder.cs" />
+    <Compile Include="RankedProgrammerBuilder.cs" />
     <Compile Include="RankedProgrammersBuilder.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
     <Compile Include="ProNet.cs">
