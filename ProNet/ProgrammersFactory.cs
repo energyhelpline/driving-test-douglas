@@ -12,15 +12,15 @@ namespace ProNet
             _programmerFactory = programmerFactory;
         }
 
-        public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> rawProgrammer)
+        public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> rawProgrammers)
         {
-            var listOfProgrammers = rawProgrammer
+            var listOfProgrammers = rawProgrammers
                 .Select(programmer => _programmerFactory.BuildProgrammer(programmer))
                 .ToList();
 
             var programmers = new Programmers(listOfProgrammers);
 
-            return AddRecommendations(programmers, rawProgrammer);
+            return AddRecommendations(programmers, rawProgrammers);
         }
 
         private IProgrammers AddRecommendations(IProgrammers programmers, IReadOnlyDictionary<string, IEnumerable<string>> recommenders)
