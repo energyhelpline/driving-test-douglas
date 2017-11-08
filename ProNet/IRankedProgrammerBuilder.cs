@@ -4,6 +4,6 @@ namespace ProNet
 {
     public interface IRankedProgrammerBuilder
     {
-        IRankedProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer);
+        IProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer);
     }
 }

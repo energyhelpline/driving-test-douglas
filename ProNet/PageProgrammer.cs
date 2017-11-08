@@ -5,23 +5,23 @@ using System.Linq;
 namespace ProNet
 {
     [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
-    public class PageRankedProgrammer : IRankedProgrammer
+    public class PageProgrammer : IProgrammer
     {
         private readonly string _name;
-        private readonly ICollection<IRankedProgrammer> _recommendations;
-        private readonly ICollection<IRankedProgrammer> _recommendedBy;
+        private readonly ICollection<IProgrammer> _recommendations;
+        private readonly ICollection<IProgrammer> _recommendedBy;
         private decimal _rank;
 
-        public PageRankedProgrammer()
+        public PageProgrammer()
         {
-            _recommendations = new List<IRankedProgrammer>();
-            _recommendedBy = new List<IRankedProgrammer>();
+            _recommendations = new List<IProgrammer>();
+            _recommendedBy = new List<IProgrammer>();
         }
 
-        public PageRankedProgrammer(string name)
+        public PageProgrammer(string name)
         {
-            _recommendations = new List<IRankedProgrammer>();
-            _recommendedBy = new List<IRankedProgrammer>();
+            _recommendations = new List<IProgrammer>();
+            _recommendedBy = new List<IProgrammer>();
             _name = name;
         }
 
@@ -44,13 +44,13 @@ namespace ProNet
                 .Aggregate(1m - 0.85m, (current, programmer) => current + 0.85m * programmer.ProgrammerRankShare);
         }
 
-        public void Recommends(IRankedProgrammer programmer)
+        public void Recommends(IProgrammer programmer)
         {
             _recommendations.Add(programmer);
             programmer.RecommendedBy(this);
         }
 
-        public void RecommendedBy(IRankedProgrammer programmer)
+        public void RecommendedBy(IProgrammer programmer)
         {
             _recommendedBy.Add(programmer);
         }

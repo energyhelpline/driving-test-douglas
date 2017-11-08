@@ -8,6 +8,6 @@ namespace ProNet
         decimal Rank { get; }
         string Name { get; }
         IEnumerable<string> Recommendations { get; }
-        void Recommends(IRankedProgrammer programmer);
+        void Recommends(IProgrammer programmer);
     }
 }

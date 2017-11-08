@@ -45,10 +45,10 @@
     <Compile Include="IProgrammersStore.cs" />
     <Compile Include="IProNet.cs" />
     <Compile Include="IRankCalculator.cs" />
-    <Compile Include="IRankedProgrammer.cs" />
+    <Compile Include="IProgrammer.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
-    <Compile Include="PageRankedProgrammer.cs" />
+    <Compile Include="PageProgrammer.cs" />
     <Compile Include="RankedProgrammerBuilder.cs" />
     <Compile Include="RankedProgrammersBuilder.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
@@ -56,7 +56,7 @@
       <DependentUpon>ProNet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RankedProgrammers.cs" />
+    <Compile Include="Programmers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />

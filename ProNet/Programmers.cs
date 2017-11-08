@@ -5,9 +5,9 @@ namespace ProNet
 {
     public class RankedProgrammers : IRankCalculator
     {
-        public readonly IEnumerable<IRankedProgrammer> _programmers;
+        public readonly IEnumerable<IProgrammer> _programmers;
 
-        public RankedProgrammers(IEnumerable<IRankedProgrammer> programmers)
+        public RankedProgrammers(IEnumerable<IProgrammer> programmers)
         {
             _programmers = programmers;
         }

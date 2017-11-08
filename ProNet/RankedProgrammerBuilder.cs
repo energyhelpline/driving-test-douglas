@@ -4,9 +4,9 @@ namespace ProNet
 {
     public class RankedProgrammerBuilder : IRankedProgrammerBuilder
     {
-        public IRankedProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
+        public IProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
         {
-            return new PageRankedProgrammer(programmer.Key);
+            return new PageProgrammer(programmer.Key);
         }
     }
 }

@@ -2,14 +2,14 @@
 
 namespace ProNet
 {
-    public interface IRankedProgrammer
+    public interface IProgrammer
     {
-        void RecommendedBy(IRankedProgrammer programmer);
+        void RecommendedBy(IProgrammer programmer);
         decimal ProgrammerRankShare { get; }
         string Name { get; }
         void UpdateRank();
         decimal Rank { get; }
         IEnumerable<string> Recommendations { get; }
-        void Recommends(IRankedProgrammer programmer);
+        void Recommends(IProgrammer programmer);
     }
 }

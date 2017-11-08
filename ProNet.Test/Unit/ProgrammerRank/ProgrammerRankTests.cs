@@ -9,7 +9,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_update_rank_of_ranked_programmer()
         {
-            var programmer = Substitute.For<IRankedProgrammer>();
+            var programmer = Substitute.For<IProgrammer>();
 
             programmer.Rank.Returns(1m);
 
@@ -25,8 +25,8 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_update_rank_of_ranked_programmers()
         {
-            var programmer1 = Substitute.For<IRankedProgrammer>();
-            var programmer2 = Substitute.For<IRankedProgrammer>();
+            var programmer1 = Substitute.For<IProgrammer>();
+            var programmer2 = Substitute.For<IProgrammer>();
 
             programmer1.Rank.Returns(1m);
             programmer2.Rank.Returns(1m);
@@ -46,7 +46,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_continue_to_calculate_programmer_rank_until_the_average_rank_is_1()
         {
-            var programmer = Substitute.For<IRankedProgrammer>();
+            var programmer = Substitute.For<IProgrammer>();
             programmer.Rank.Returns(0.5m, 1m);
 
             var rankedProgrammers = RankedProgrammers(programmer);
@@ -60,8 +60,8 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_programmer_rank_shown_in_example_1()
         {
-            var programmerA = new PageRankedProgrammer();
-            var programmerB = new PageRankedProgrammer();
+            var programmerA = new PageProgrammer();
+            var programmerB = new PageProgrammer();
 
             programmerA.Recommends(programmerB);
             programmerB.Recommends(programmerA);
@@ -77,10 +77,10 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_programmer_rank_shown_in_example_2()
         {
-            var programmerA = new PageRankedProgrammer();
-            var programmerB = new PageRankedProgrammer();
-            var programmerC = new PageRankedProgrammer();
-            var programmerD = new PageRankedProgrammer();
+            var programmerA = new PageProgrammer();
+            var programmerB = new PageProgrammer();
+            var programmerC = new PageProgrammer();
+            var programmerD = new PageProgrammer();
 
             programmerA.Recommends(programmerB);
             programmerA.Recommends(programmerC);
@@ -98,7 +98,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             Assert.That(programmerD.Rank, Is.EqualTo(0.15m).Within(0.00001m));
         }
 
-        private static RankedProgrammers RankedProgrammers(params IRankedProgrammer[] programmers)
+        private static RankedProgrammers RankedProgrammers(params IProgrammer[] programmers)
         {
             return new RankedProgrammers(programmers);
         }

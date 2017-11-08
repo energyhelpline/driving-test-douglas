@@ -8,8 +8,8 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_programmer_rank_for_a_programmer_with_a_single_recommendation()
         {
-            var programmer1 = new PageRankedProgrammer();
-            var programmer2 = new PageRankedProgrammer();
+            var programmer1 = new PageProgrammer();
+            var programmer2 = new PageProgrammer();
 
             programmer2.Recommends(programmer1);
 
@@ -21,9 +21,9 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_the_share_of_page_rank()
         {
-            var programmer1 = new PageRankedProgrammer();
-            var programmer2 = new PageRankedProgrammer();
-            var programmer3 = new PageRankedProgrammer();
+            var programmer1 = new PageProgrammer();
+            var programmer2 = new PageProgrammer();
+            var programmer3 = new PageProgrammer();
 
             programmer2.Recommends(programmer1);
             programmer2.Recommends(programmer3);
@@ -35,9 +35,9 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_programmer_rank_for_a_programmer_with_multiple_recommendations()
         {
-            var programmer1 = new PageRankedProgrammer();
-            var programmer2 = new PageRankedProgrammer();
-            var programmer3 = new PageRankedProgrammer();
+            var programmer1 = new PageProgrammer();
+            var programmer2 = new PageProgrammer();
+            var programmer3 = new PageProgrammer();
 
             programmer2.Rank = 0.5m;
             programmer3.Rank = 0.25m;
