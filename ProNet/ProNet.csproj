@@ -46,6 +46,7 @@
     <Compile Include="IProNet.cs" />
     <Compile Include="IProgrammers.cs" />
     <Compile Include="IProgrammer.cs" />
+    <Compile Include="IRankedProgrammers.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
     <Compile Include="PageProgrammer.cs" />

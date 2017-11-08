@@ -1,12 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ProNet
+﻿namespace ProNet
 {
-    public interface IProgrammers
+    public interface IProgrammers : IRankedProgrammers
     {
-        void Calculate();
-        decimal RankFor(string name);
-        IEnumerable<string> RecommendationsFor(string name);
         void AddRecommendation(string recommender, string recommendation);
     }
 }
