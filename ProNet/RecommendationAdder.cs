@@ -8,13 +8,18 @@ namespace ProNet
         {
             foreach (var recommender in recommenders)
             {
-                foreach (var recommendation in recommenders[recommender.Key])
-                {
-                    programmers.AddRecommendation(recommender.Key, recommendation);
-                }
+                AddRecommendations(programmers, recommender.Key, recommenders[recommender.Key]);
             }
 
             return programmers;
+        }
+
+        private static void AddRecommendations(IProgrammers programmers, string recommender, IEnumerable<string> recommendations)
+        {
+            foreach (var recommendation in recommendations)
+            {
+                programmers.AddRecommendation(recommender, recommendation);
+            }
         }
     }
 }
