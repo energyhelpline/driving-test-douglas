@@ -9,12 +9,12 @@ namespace ProNet
     public class XmlProgrammersStore : IProgrammersStore
     {
         private readonly IXmlLoader _xmlLoader;
-        private readonly IProgrammersBuilder _rankedProgrammersBuilder;
+        private readonly IProgrammersBuilder _programmersBuilder;
 
-        public XmlProgrammersStore(IXmlLoader xmlLoader, IProgrammersBuilder rankedProgrammersBuilder)
+        public XmlProgrammersStore(IXmlLoader xmlLoader, IProgrammersBuilder programmersBuilder)
         {
             _xmlLoader = xmlLoader;
-            _rankedProgrammersBuilder = rankedProgrammersBuilder;
+            _programmersBuilder = programmersBuilder;
         }
 
         public IRankCalculator GetAll()
@@ -32,7 +32,7 @@ namespace ProNet
                         .Select(recommendation => recommendation.Value)})
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
 
-            return _rankedProgrammersBuilder.BuildProgrammers(recommendedProgrammers);
+            return _programmersBuilder.BuildProgrammers(recommendedProgrammers);
         }
     }
 }
