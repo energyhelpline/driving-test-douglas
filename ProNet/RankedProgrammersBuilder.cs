@@ -7,22 +7,17 @@ namespace ProNet
     [SuppressMessage("CodeCraft.FxCop", "TT1011:IdentifierLengthRule")]
     public class RankedProgrammersBuilder : IProgrammersBuilder
     {
-        public RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
+        public RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IPageRankedProgrammerBuilder pageRankedProgrammerBuilder)
         {
             var programmers = programmerDictionary
-                .ToDictionary(programmer => programmer.Key, BuildProgrammer);
+                .ToDictionary(programmer => programmer.Key, programmer => pageRankedProgrammerBuilder.BuildProgrammer(programmer));
 
             RecommendProgrammers(programmerDictionary, programmers);
 
             return new RankedProgrammers(programmers.Values);
         }
 
-        private static PageRankedProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
-        {
-            return new PageRankedProgrammer(programmer.Key);
-        }
-
-        private static void RecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, PageRankedProgrammer> programmers)
+        private static void RecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IRankedProgrammer> programmers)
         {
             foreach (var pageRankedProgrammer in programmers.Values)
             {
@@ -30,7 +25,7 @@ namespace ProNet
             }
         }
 
-        private static void RecommendProgrammer(PageRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, PageRankedProgrammer> programmers, IEnumerable<string> recommendations)
+        private static void RecommendProgrammer(IRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, IRankedProgrammer> programmers, IEnumerable<string> recommendations)
         {
             foreach (var recommendation in recommendations)
             {
