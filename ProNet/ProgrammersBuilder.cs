@@ -5,7 +5,7 @@ using System.Linq;
 namespace ProNet
 {
     [SuppressMessage("CodeCraft.FxCop", "TT1011:IdentifierLengthRule")]
-    public class RankedProgrammersBuilder : IProgrammersBuilder
+    public class ProgrammersBuilder : IProgrammersBuilder
     {
         public Programmers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IRankedProgrammerBuilder rankedProgrammerBuilder)
         {
