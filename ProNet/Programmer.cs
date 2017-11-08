@@ -10,12 +10,6 @@ namespace ProNet
         private readonly ICollection<IProgrammer> _recommendedBy;
         private decimal _rank;
 
-        public Programmer()
-        {
-            _recommendations = new List<IProgrammer>();
-            _recommendedBy = new List<IProgrammer>();
-        }
-
         public Programmer(string name)
         {
             _recommendations = new List<IProgrammer>();
