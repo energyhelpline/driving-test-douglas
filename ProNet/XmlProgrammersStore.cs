@@ -21,51 +21,51 @@ namespace ProNet
 
             var programmers = RankedProgrammers(xml);
 
-            programmers = AddRecommendations(programmers, xml);
+            var recommendedProgrammers = AddRecommendations(programmers, xml);
 
-            return BuildProgrammers(programmers);
+            return BuildProgrammers(recommendedProgrammers);
         }
 
-        private static List<IRankedProgrammer> AddRecommendations(List<IRankedProgrammer> programmers, XElement xml)
+        private static IDictionary<string, IEnumerable<string>> AddRecommendations(IEnumerable<string> programmers, XElement xml)
         {
-            foreach (var programmer in programmers)
-            {
-                var recommendations = xml
-                    .Descendants("Programmer")
-                    .Where(p => p.Attribute("name").Value == programmer.Name)
-                    .Descendants("Recommendations")
-                    .Descendants("Recommendation")
-                    .Select(recommendation => recommendation.Value);
-
-                AddRecommendations(recommendations, programmer, programmers);
-            }
-
-            return programmers;
+            return programmers
+                .Select(programmer => new {
+                    Programmer = programmer,
+                    Recommendations = xml
+                        .Descendants("Programmer")
+                        .Where(p => p.Attribute("name").Value == programmer)
+                        .Descendants("Recommendations")
+                        .Descendants("Recommendation")
+                        .Select(recommendation => recommendation.Value)})
+                .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
         }
 
-        private static List<IRankedProgrammer> RankedProgrammers(XElement xml)
+        private static IEnumerable<string> RankedProgrammers(XElement xml)
         {
             return xml
                 .Descendants("Programmer")
-                .Select(BuildProgrammer).ToList();
+                .Select(programmer => programmer.Attribute("name").Value );
         }
 
-        private static void AddRecommendations(IEnumerable<string> recommendations, IRankedProgrammer programmer, List<IRankedProgrammer> programmers)
+        private static IRankCalculator BuildProgrammers(IDictionary<string, IEnumerable<string>> programmers)
         {
-            foreach (var recommmendation in recommendations)
+            var pageRankedProgrammers = new Dictionary<string, PageRankedProgrammer>();
+
+            foreach (var programmer in programmers)
             {
-                programmer.Recommends(programmers.Single(p => p.Name == recommmendation));
+                pageRankedProgrammers.Add(programmer.Key, new PageRankedProgrammer(programmer.Key));
             }
-        }
 
-        private static IRankCalculator BuildProgrammers(List<IRankedProgrammer> programmers)
-        {
-            return new RankedProgrammers(programmers);
-        }
+            foreach (var pageRankedProgrammer in pageRankedProgrammers.Values)
+            {
+                var recommendationNames = programmers[pageRankedProgrammer.Name];
+                foreach (var recommendationName in recommendationNames)
+                {
+                    pageRankedProgrammer.Recommends(pageRankedProgrammers[recommendationName]);
+                }
+            }
 
-        private static IRankedProgrammer BuildProgrammer(XElement programmer)
-        {
-            return new PageRankedProgrammer(programmer.Attribute("name").Value);
+            return new RankedProgrammers(pageRankedProgrammers.Values);
         }
     }
 }
