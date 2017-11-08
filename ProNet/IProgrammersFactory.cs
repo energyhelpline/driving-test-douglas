@@ -4,6 +4,6 @@ namespace ProNet
 {
     public interface IProgrammersFactory
     {
-        Programmers BuildProgrammers(Dictionary<string, IProgrammer> programmers);
+        IRankCalculator BuildProgrammers(Dictionary<string, IProgrammer> programmers);
     }
 }
