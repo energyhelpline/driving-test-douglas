@@ -2,6 +2,6 @@
 {
     public interface IProgrammersStore
     {
-        IRankCalculator GetAll();
+        IProgrammers GetAll();
     }
 }

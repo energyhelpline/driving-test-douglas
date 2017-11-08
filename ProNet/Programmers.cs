@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ProNet
 {
-    public class Programmers : IRankCalculator
+    public class Programmers : IProgrammers
     {
         public readonly IEnumerable<IProgrammer> _programmers;
 

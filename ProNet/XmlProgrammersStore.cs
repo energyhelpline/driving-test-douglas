@@ -15,7 +15,7 @@ namespace ProNet
             _recommendationAdder = recommendationAdder;
         }
 
-        public IRankCalculator GetAll()
+        public IProgrammers GetAll()
         {
             var programmerNames = GetProgrammerNames();
 

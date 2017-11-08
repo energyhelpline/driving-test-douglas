@@ -4,6 +4,6 @@ namespace ProNet
 {
     public interface IRecommendationAdder
     {
-        IRankCalculator AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmers);
+        IProgrammers AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmers);
     }
 }

@@ -15,7 +15,7 @@ namespace ProNet
             _programmersFactory = programmersFactory;
         }
 
-        public IRankCalculator AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
+        public IProgrammers AddRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             var programmers = programmerDictionary
                 .ToDictionary(programmer => programmer.Key, _programmerFactory.BuildProgrammer);

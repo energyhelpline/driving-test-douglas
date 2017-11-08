@@ -45,7 +45,7 @@
     <Compile Include="IRecommendationAdder.cs" />
     <Compile Include="IProgrammersStore.cs" />
     <Compile Include="IProNet.cs" />
-    <Compile Include="IRankCalculator.cs" />
+    <Compile Include="IProgrammers.cs" />
     <Compile Include="IProgrammer.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
