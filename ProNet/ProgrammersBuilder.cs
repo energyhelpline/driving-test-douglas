@@ -5,17 +5,24 @@ namespace ProNet
 {
     public class ProgrammersBuilder : IProgrammersBuilder
     {
-        public Programmers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IProgrammerBuilder programmerBuilder)
+        private readonly IProgrammerBuilder _programmerBuilder;
+
+        public ProgrammersBuilder(IProgrammerBuilder programmerBuilder)
+        {
+            _programmerBuilder = programmerBuilder;
+        }
+
+        public Programmers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             var programmers = programmerDictionary
-                .ToDictionary(programmer => programmer.Key, programmerBuilder.BuildProgrammer);
+                .ToDictionary(programmer => programmer.Key, _programmerBuilder.BuildProgrammer);
 
-            RecommendProgrammers(programmerDictionary, programmers);
+            ThisIsAVeryLongMethodNameRecommendProgrammers(programmerDictionary, programmers);
 
             return new Programmers(programmers.Values);
         }
 
-        private static void RecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IProgrammer> programmers)
+        private static void ThisIsAVeryLongMethodNameRecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IProgrammer> programmers)
         {
             foreach (var pageRankedProgrammer in programmers.Values)
             {

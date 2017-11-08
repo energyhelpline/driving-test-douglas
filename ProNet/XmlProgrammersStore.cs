@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -22,7 +21,7 @@ namespace ProNet
 
             var programmers = GetProgrammers(programmerNames);
 
-            return _programmersBuilder.BuildProgrammers(programmers, new ProgrammerBuilder());
+            return _programmersBuilder.BuildProgrammers(programmers);
         }
 
         private Dictionary<string, IEnumerable<string>> GetProgrammers(IEnumerable<string> programmerNames)
