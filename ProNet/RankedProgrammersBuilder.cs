@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace ProNet
 {
+    [SuppressMessage("CodeCraft.FxCop", "TT1011:IdentifierLengthRule")]
     public class RankedProgrammersBuilder : IProgrammersBuilder
     {
         public RankedProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
