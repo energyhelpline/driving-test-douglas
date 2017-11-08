@@ -9,7 +9,7 @@ namespace ProNet
         {
             var programmers = GetDictionaryOfPageRankedProgrammers(programmerDictionary);
 
-            PopulateRecommendations(programmerDictionary, programmers);
+            RecommendProgrammers(programmerDictionary, programmers);
 
             return new RankedProgrammers(programmers.Values);
         }
@@ -17,23 +17,23 @@ namespace ProNet
         private static IReadOnlyDictionary<string, PageRankedProgrammer> GetDictionaryOfPageRankedProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             return programmerDictionary
-                .ToDictionary(programmer => programmer.Key, BuildPageRankedProgrammer);
+                .ToDictionary(programmer => programmer.Key, BuildProgrammer);
         }
 
-        private static PageRankedProgrammer BuildPageRankedProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
+        private static PageRankedProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
         {
             return new PageRankedProgrammer(programmer.Key);
         }
 
-        private static void PopulateRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, PageRankedProgrammer> programmers)
+        private static void RecommendProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, PageRankedProgrammer> programmers)
         {
             foreach (var pageRankedProgrammer in programmers.Values)
             {
-                AddRecommendationsToProgrammer(pageRankedProgrammer, programmers, programmerDictionary[pageRankedProgrammer.Name]);
+                RecommendProgrammer(pageRankedProgrammer, programmers, programmerDictionary[pageRankedProgrammer.Name]);
             }
         }
 
-        private static void AddRecommendationsToProgrammer(PageRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, PageRankedProgrammer> programmers, IEnumerable<string> recommendations)
+        private static void RecommendProgrammer(PageRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, PageRankedProgrammer> programmers, IEnumerable<string> recommendations)
         {
             foreach (var recommendation in recommendations)
             {
