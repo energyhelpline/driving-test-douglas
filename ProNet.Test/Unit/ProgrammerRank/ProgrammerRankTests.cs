@@ -66,7 +66,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmerA.Recommends(programmerB);
             programmerB.Recommends(programmerA);
 
-            var rankedProgrammers = new RankedProgrammers(new [] {programmerA, programmerB});
+            var rankedProgrammers = new Programmers(new [] {programmerA, programmerB});
 
             rankedProgrammers.Calculate();
 
@@ -88,7 +88,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmerC.Recommends(programmerA);
             programmerD.Recommends(programmerC);
 
-            var rankedProgrammers = new RankedProgrammers(new []{programmerA, programmerB, programmerC, programmerD});
+            var rankedProgrammers = new Programmers(new []{programmerA, programmerB, programmerC, programmerD});
 
             rankedProgrammers.Calculate();
 
@@ -98,9 +98,9 @@ namespace ProNet.Test.Unit.ProgrammerRank
             Assert.That(programmerD.Rank, Is.EqualTo(0.15m).Within(0.00001m));
         }
 
-        private static RankedProgrammers RankedProgrammers(params IProgrammer[] programmers)
+        private static Programmers RankedProgrammers(params IProgrammer[] programmers)
         {
-            return new RankedProgrammers(programmers);
+            return new Programmers(programmers);
         }
     }
 }

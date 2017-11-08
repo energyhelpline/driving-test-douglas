@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace ProNet
 {
-    public class RankedProgrammers : IRankCalculator
+    public class Programmers : IRankCalculator
     {
         public readonly IEnumerable<IProgrammer> _programmers;
 
-        public RankedProgrammers(IEnumerable<IProgrammer> programmers)
+        public Programmers(IEnumerable<IProgrammer> programmers)
         {
             _programmers = programmers;
         }
