@@ -19,34 +19,20 @@ namespace ProNet
 
         public IRankCalculator GetAll()
         {
-            var xml = _xmlLoader.Load();
-
-            var programmers = RankedProgrammers(xml);
-
-            var recommendedProgrammers = AddRecommendations(programmers, xml);
-
-            return _rankedProgrammersBuilder.BuildProgrammers(recommendedProgrammers);
-        }
-
-        private static IDictionary<string, IEnumerable<string>> AddRecommendations(IEnumerable<string> programmers, XElement xml)
-        {
-            return programmers
+            var recommendedProgrammers = _xmlLoader.Load()
+                .Descendants("Programmer")
+                .Select(programmer => programmer.Attribute("name").Value )
                 .Select(programmer => new {
                     Programmer = programmer,
-                    Recommendations = xml
+                    Recommendations = _xmlLoader.Load()
                         .Descendants("Programmer")
                         .Where(p => p.Attribute("name").Value == programmer)
                         .Descendants("Recommendations")
                         .Descendants("Recommendation")
                         .Select(recommendation => recommendation.Value)})
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
-        }
 
-        private static IEnumerable<string> RankedProgrammers(XElement xml)
-        {
-            return xml
-                .Descendants("Programmer")
-                .Select(programmer => programmer.Attribute("name").Value );
+            return _rankedProgrammersBuilder.BuildProgrammers(recommendedProgrammers);
         }
     }
 }
