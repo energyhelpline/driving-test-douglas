@@ -14,13 +14,18 @@ namespace ProNet
             return new RankedProgrammers(programmers.Values);
         }
 
-        private static IReadOnlyDictionary<string, PageRankedProgrammer> GetDictionaryOfPageRankedProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
+        private static IReadOnlyDictionary<string, IRankedProgrammer> GetDictionaryOfPageRankedProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary)
         {
             return programmerDictionary
-                .ToDictionary(programmer => programmer.Key, programmer => new PageRankedProgrammer(programmer.Key));
+                .ToDictionary(programmer => programmer.Key, BuildPageRankedProgrammer);
         }
 
-        private static void PopulateRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, PageRankedProgrammer> programmers)
+        private static IRankedProgrammer BuildPageRankedProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
+        {
+            return new PageRankedProgrammer(programmer.Key);
+        }
+
+        private static void PopulateRecommendations(IReadOnlyDictionary<string, IEnumerable<string>> programmerDictionary, IReadOnlyDictionary<string, IRankedProgrammer> programmers)
         {
             foreach (var pageRankedProgrammer in programmers.Values)
             {
@@ -28,7 +33,7 @@ namespace ProNet
             }
         }
 
-        private static void AddRecommendationsToProgrammer(IRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, PageRankedProgrammer> programmers, IEnumerable<string> recommendations)
+        private static void AddRecommendationsToProgrammer(IRankedProgrammer pageRankedProgrammer, IReadOnlyDictionary<string, IRankedProgrammer> programmers, IEnumerable<string> recommendations)
         {
             foreach (var recommendation in recommendations)
             {
