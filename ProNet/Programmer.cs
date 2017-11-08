@@ -5,20 +5,20 @@ using System.Linq;
 namespace ProNet
 {
     [SuppressMessage("CodeCraft.FxCop", "TT1019:ClientSpecificInterface")]
-    public class PageProgrammer : IProgrammer
+    public class Programmer : IProgrammer
     {
         private readonly string _name;
         private readonly ICollection<IProgrammer> _recommendations;
         private readonly ICollection<IProgrammer> _recommendedBy;
         private decimal _rank;
 
-        public PageProgrammer()
+        public Programmer()
         {
             _recommendations = new List<IProgrammer>();
             _recommendedBy = new List<IProgrammer>();
         }
 
-        public PageProgrammer(string name)
+        public Programmer(string name)
         {
             _recommendations = new List<IProgrammer>();
             _recommendedBy = new List<IProgrammer>();

@@ -49,7 +49,7 @@
     <Compile Include="IRankedProgrammers.cs" />
     <Compile Include="IRankUpdateable.cs" />
     <Compile Include="IXmlLoader.cs" />
-    <Compile Include="PageProgrammer.cs" />
+    <Compile Include="Programmer.cs" />
     <Compile Include="ProgrammerFactory.cs" />
     <Compile Include="ProgrammersFactory.cs" />
     <Compile Include="XmlProgrammersStore.cs" />

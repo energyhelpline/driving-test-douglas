@@ -60,8 +60,8 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_programmer_rank_shown_in_example_1()
         {
-            var programmerA = new PageProgrammer();
-            var programmerB = new PageProgrammer();
+            var programmerA = new Programmer();
+            var programmerB = new Programmer();
 
             programmerA.Recommends(programmerB);
             programmerB.Recommends(programmerA);
@@ -77,10 +77,10 @@ namespace ProNet.Test.Unit.ProgrammerRank
         [Test]
         public void Should_calculate_programmer_rank_shown_in_example_2()
         {
-            var programmerA = new PageProgrammer();
-            var programmerB = new PageProgrammer();
-            var programmerC = new PageProgrammer();
-            var programmerD = new PageProgrammer();
+            var programmerA = new Programmer();
+            var programmerB = new Programmer();
+            var programmerC = new Programmer();
+            var programmerD = new Programmer();
 
             programmerA.Recommends(programmerB);
             programmerA.Recommends(programmerC);

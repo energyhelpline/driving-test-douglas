@@ -6,12 +6,12 @@ namespace ProNet
     {
         public IProgrammer BuildProgrammer(KeyValuePair<string, IEnumerable<string>> programmer)
         {
-            return new PageProgrammer(programmer.Key);
+            return new Programmer(programmer.Key);
         }
 
         public IProgrammer BuildProgrammer(string name)
         {
-            return new PageProgrammer(name);
+            return new Programmer(name);
         }
     }
 }
