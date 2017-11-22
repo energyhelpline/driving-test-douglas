@@ -13,7 +13,7 @@ namespace ProNet
             _programmerFactory = programmerFactory;
         }
 
-        public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> rawProgrammers, IReadOnlyDictionary<string, IEnumerable<string>> skills)
+        public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> recommendations, IReadOnlyDictionary<string, IEnumerable<string>> skills)
         {
             var listOfProgrammers = skills
                 .Select(programmer => _programmerFactory.BuildProgrammer(programmer.Key, programmer.Value))
@@ -21,7 +21,7 @@ namespace ProNet
 
             var programmers = new Programmers(listOfProgrammers);
 
-            return AddRecommendations(programmers, rawProgrammers);
+            return AddRecommendations(programmers, recommendations);
         }
 
         private IProgrammers AddRecommendations(IProgrammers programmers, IReadOnlyDictionary<string, IEnumerable<string>> recommenders)
