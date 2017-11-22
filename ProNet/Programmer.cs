@@ -54,7 +54,7 @@ namespace ProNet
             if (HasRecommended(programmer))
                 return 1;
 
-            if (_recommendedBy.Contains(programmer))
+            if (IsRecommendedBy(programmer))
                 return 1;
 
             foreach (var recommendation in _recommendations)
