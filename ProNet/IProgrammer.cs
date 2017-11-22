@@ -17,5 +17,6 @@ namespace ProNet
         bool HasRecommended(IProgrammer programmer);
         bool IsRecommendedBy(IProgrammer programmer);
         void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, List<IProgrammer> processed);
+        void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, List<IProgrammer> processed);
     }
 }

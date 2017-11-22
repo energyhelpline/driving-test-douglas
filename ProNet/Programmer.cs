@@ -70,13 +70,11 @@ namespace ProNet
                 processed.Add(programmerToProcess.Item2);
 
                 programmerToProcess.Item2.AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, processed);
+
+                programmerToProcess.Item2.AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, processed);
             }
 
-            foreach(var recommendedBy in _recommendedBy)
-                if (recommendedBy.IsRecommendedBy(programmer))
-                    return 2;
-
-            return 3;
+            throw new ProgrammersNotConnectedException();
         }
 
         public bool HasRecommended(IProgrammer programmer)
@@ -98,9 +96,22 @@ namespace ProNet
             }
         }
 
+        public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, List<IProgrammer> processed)
+        {
+            foreach (var recommendedBy in _recommendedBy)
+            {
+                if (!processed.Contains(recommendedBy))
+                    queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendedBy));
+            }
+        }
+
         public void RecommendedBy(IProgrammer programmer)
         {
             _recommendedBy.Add(programmer);
         }
+    }
+
+    public class ProgrammersNotConnectedException : Exception
+    {
     }
 }
