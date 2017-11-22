@@ -33,12 +33,17 @@ namespace ProNet
 
         private IEnumerable<string> GetSkills(string name)
         {
-            return _xmlLoader.Load()
-                .Descendants("Programmer")
-                .Where(p => p.Attribute("name").Value == name)
+            return GetProgrammer(name)
                 .Descendants("Skills")
                 .Descendants("Skill")
                 .Select(skill => skill.Value);
+        }
+
+        private IEnumerable<XElement> GetProgrammer(string name)
+        {
+            return _xmlLoader.Load()
+                .Descendants("Programmer")
+                .Where(p => p.Attribute("name").Value == name);
         }
 
         private Dictionary<string, IEnumerable<string>> GetProgrammers()
@@ -59,9 +64,7 @@ namespace ProNet
 
         private IEnumerable<string> GetRecommendations(string programmer)
         {
-            return _xmlLoader.Load()
-                .Descendants("Programmer")
-                .Where(p => p.Attribute("name").Value == programmer)
+            return GetProgrammer(programmer)
                 .Descendants("Recommendations")
                 .Descendants("Recommendation")
                 .Select(recommendation => recommendation.Value);
