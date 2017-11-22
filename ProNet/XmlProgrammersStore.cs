@@ -45,9 +45,9 @@ namespace ProNet
         private IReadOnlyDictionary<string, IEnumerable<string>> GetRecommendations()
         {
             return GetProgrammerNames()
-                .Select(programmer => new {
-                    Programmer = programmer,
-                    Recommendations = GetRecommendationsFor(programmer)})
+                .Select(name => new {
+                    Programmer = name,
+                    Recommendations = GetRecommendationsFor(name)})
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
         }
 
@@ -58,9 +58,9 @@ namespace ProNet
                 .Select(programmer => programmer.Attribute("name").Value );
         }
 
-        private IEnumerable<string> GetRecommendationsFor(string programmer)
+        private IEnumerable<string> GetRecommendationsFor(string name)
         {
-            return GetProgrammer(programmer)
+            return GetProgrammer(name)
                 .Descendants("Recommendations")
                 .Descendants("Recommendation")
                 .Select(recommendation => recommendation.Value);
