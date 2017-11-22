@@ -49,5 +49,15 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             Assert.That(programmer1.Rank, Is.EqualTo(0.7875m));
         }
+
+        [Test]
+        public void Should_calculate_degrees_of_separation_for_the_programmer_to_themselves_as_0()
+        {
+            var programmer = new Programmer("1", null);
+
+            var degreesOfSeparation = programmer.DegreesOfSeparation(programmer);
+
+            Assert.That(degreesOfSeparation, Is.EqualTo(0));
+        }
     }
 }

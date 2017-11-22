@@ -48,6 +48,9 @@ namespace ProNet
 
         public int DegreesOfSeparation(IProgrammer programmer)
         {
+            if (this == programmer)
+                return 0;
+
             return 3;
         }
 
