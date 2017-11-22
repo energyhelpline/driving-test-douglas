@@ -17,11 +17,7 @@ namespace ProNet
 
         public IProgrammers GetAll()
         {
-            var recommendations = GetProgrammers();
-
-            var skills = GetSkills();
-
-            return _programmersFactory.BuildProgrammers(recommendations, skills);
+            return _programmersFactory.BuildProgrammers(GetProgrammers(), GetSkills());
         }
 
         private IReadOnlyDictionary<string, IEnumerable<string>> GetSkills()
