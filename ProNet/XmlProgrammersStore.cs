@@ -55,15 +55,19 @@ namespace ProNet
 
         private IEnumerable<string> GetProgrammerNames()
         {
-            return _xmlLoader.Load()
-                .Descendants("Programmer")
+            return GetProgrmmerElements()
                 .Select(programmer => programmer.Attribute("name").Value );
+        }
+
+        private IEnumerable<XElement> GetProgrmmerElements()
+        {
+            return _xmlLoader.Load()
+                .Descendants("Programmer");
         }
 
         private IEnumerable<XElement> GetProgrammer(string name)
         {
-            return _xmlLoader.Load()
-                .Descendants("Programmer")
+            return GetProgrmmerElements()
                 .Where(p => p.Attribute("name").Value == name);
         }
     }
