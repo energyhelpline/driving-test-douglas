@@ -7,7 +7,7 @@ namespace ProNet
     {
         public readonly IEnumerable<IProgrammer> _programmers;
 
-        public Programmers(IEnumerable<IProgrammer> programmers)
+        public Programmers(List<IProgrammer> programmers)
         {
             _programmers = programmers;
         }

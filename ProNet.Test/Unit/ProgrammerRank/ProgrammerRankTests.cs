@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace ProNet.Test.Unit.ProgrammerRank
@@ -13,7 +14,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             programmer.Rank.Returns(1m);
 
-            var rankedProgrammers = RankedProgrammers(programmer);
+            var rankedProgrammers = RankedProgrammers(new List<IProgrammer> { programmer });
 
             rankedProgrammers.Calculate();
 
@@ -31,7 +32,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmer1.Rank.Returns(1m);
             programmer2.Rank.Returns(1m);
 
-            var rankedProgrammers = RankedProgrammers(programmer1, programmer2);
+            var rankedProgrammers = RankedProgrammers(new List<IProgrammer> { programmer1, programmer2 });
 
             rankedProgrammers.Calculate();
 
@@ -49,7 +50,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             var programmer = Substitute.For<IProgrammer>();
             programmer.Rank.Returns(0.5m, 1m);
 
-            var rankedProgrammers = RankedProgrammers(programmer);
+            var rankedProgrammers = RankedProgrammers(new List<IProgrammer> { programmer });
             rankedProgrammers.Calculate();
 
             programmer
@@ -66,7 +67,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmerA.Recommends(programmerB);
             programmerB.Recommends(programmerA);
 
-            var rankedProgrammers = new Programmers(new [] {programmerA, programmerB});
+            var rankedProgrammers = new Programmers(new List<IProgrammer> { programmerA, programmerB });
 
             rankedProgrammers.Calculate();
 
@@ -88,7 +89,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             programmerC.Recommends(programmerA);
             programmerD.Recommends(programmerC);
 
-            var rankedProgrammers = new Programmers(new []{programmerA, programmerB, programmerC, programmerD});
+            var rankedProgrammers = new Programmers(new List<IProgrammer> {programmerA, programmerB, programmerC, programmerD});
 
             rankedProgrammers.Calculate();
 
@@ -98,7 +99,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
             Assert.That(programmerD.Rank, Is.EqualTo(0.15m).Within(0.00001m));
         }
 
-        private static Programmers RankedProgrammers(params IProgrammer[] programmers)
+        private static Programmers RankedProgrammers(List<IProgrammer> programmers)
         {
             return new Programmers(programmers);
         }
