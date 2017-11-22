@@ -55,8 +55,6 @@ namespace ProNet
             var toProcess = new Queue<Tuple<int, IProgrammer>>();
             toProcess.Enqueue(new Tuple<int, IProgrammer>(1, this));
 
-            var processed = new List<IProgrammer>();
-
             while (toProcess.Count > 0)
             {
                 var programmerToProcess = toProcess.Dequeue();
@@ -67,11 +65,9 @@ namespace ProNet
                 if (programmerToProcess.Item2.IsRecommendedBy(programmer))
                     return programmerToProcess.Item1;
 
-                processed.Add(programmerToProcess.Item2);
+                programmerToProcess.Item2.AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
 
-                programmerToProcess.Item2.AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, processed);
-
-                programmerToProcess.Item2.AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, processed);
+                programmerToProcess.Item2.AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
             }
 
             throw new ProgrammersNotConnectedException();
@@ -87,20 +83,20 @@ namespace ProNet
             return _recommendedBy.Contains(programmer);
         }
 
-        public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, List<IProgrammer> processed)
+        public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
         {
             foreach (var recommendation in _recommendations)
             {
-                if (!processed.Contains(recommendation))
+                if (processed != recommendation)
                     queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendation));
             }
         }
 
-        public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, List<IProgrammer> processed)
+        public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
         {
             foreach (var recommendedBy in _recommendedBy)
             {
-                if (!processed.Contains(recommendedBy))
+                if (processed != recommendedBy)
                     queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendedBy));
             }
         }
