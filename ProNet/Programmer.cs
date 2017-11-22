@@ -54,6 +54,9 @@ namespace ProNet
             if (_recommendations.Contains(programmer))
                 return 1;
 
+            if (_recommendedBy.Contains(programmer))
+                return 1;
+
             return 3;
         }
 
