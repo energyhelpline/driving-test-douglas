@@ -14,5 +14,6 @@ namespace ProNet
         void Recommends(IProgrammer programmer);
         int DegreesOfSeparation(IProgrammer name);
         bool HasRecommended(IProgrammer programmer);
+        bool IsRecommendedBy(IProgrammer programmer);
     }
 }

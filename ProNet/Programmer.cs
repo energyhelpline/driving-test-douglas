@@ -61,12 +61,21 @@ namespace ProNet
                 if (recommendation.HasRecommended(programmer))
                     return 2;
 
+            foreach(var recommendedBy in _recommendedBy)
+                if (recommendedBy.IsRecommendedBy(programmer))
+                    return 2;
+
             return 3;
         }
 
         public bool HasRecommended(IProgrammer programmer)
         {
             return _recommendations.Contains(programmer);
+        }
+
+        public bool IsRecommendedBy(IProgrammer programmer)
+        {
+            return _recommendedBy.Contains(programmer);
         }
 
         public void RecommendedBy(IProgrammer programmer)
