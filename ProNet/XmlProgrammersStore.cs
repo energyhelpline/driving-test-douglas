@@ -24,7 +24,7 @@ namespace ProNet
             return _programmersFactory.BuildProgrammers(recommendations, skills);
         }
 
-        private Dictionary<string, IEnumerable<string>> GetSkills()
+        private IReadOnlyDictionary<string, IEnumerable<string>> GetSkills()
         {
             return GetProgrammerNames()
                 .Select(name => new {Name = name, Skills = GetSkills(name) })
@@ -46,7 +46,7 @@ namespace ProNet
                 .Where(p => p.Attribute("name").Value == name);
         }
 
-        private Dictionary<string, IEnumerable<string>> GetProgrammers()
+        private IReadOnlyDictionary<string, IEnumerable<string>> GetProgrammers()
         {
             return GetProgrammerNames()
                 .Select(programmer => new {
