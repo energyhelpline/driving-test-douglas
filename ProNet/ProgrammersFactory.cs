@@ -24,11 +24,11 @@ namespace ProNet
             return AddRecommendations(programmers, recommendations);
         }
 
-        private IProgrammers AddRecommendations(IProgrammers programmers, IReadOnlyDictionary<string, IEnumerable<string>> recommenders)
+        private IProgrammers AddRecommendations(IProgrammers programmers, IReadOnlyDictionary<string, IEnumerable<string>> recommendations)
         {
-            foreach (var recommender in recommenders)
+            foreach (var recommender in recommendations)
             {
-                AddRecommendations(programmers, recommender.Key, recommenders[recommender.Key]);
+                AddRecommendations(programmers, recommender.Key, recommendations[recommender.Key]);
             }
 
             return programmers;
