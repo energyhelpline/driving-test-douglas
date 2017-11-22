@@ -52,6 +52,11 @@ namespace ProNet
             return GetByName(programmer).Skills;
         }
 
+        public int DegreesOfSeparation(string programmer1, string programmer2)
+        {
+            return GetByName(programmer1).DegreesOfSeparation(GetByName(programmer2));
+        }
+
         public void AddRecommendation(string recommender, string recommendation)
         {
             GetByName(recommender).Recommends(GetByName(recommendation));

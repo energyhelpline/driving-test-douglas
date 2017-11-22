@@ -12,5 +12,6 @@ namespace ProNet
         IEnumerable<string> Recommendations { get; }
         IEnumerable<string> Skills { get; }
         void Recommends(IProgrammer programmer);
+        int DegreesOfSeparation(IProgrammer name);
     }
 }
