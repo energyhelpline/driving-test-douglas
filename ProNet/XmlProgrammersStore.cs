@@ -17,9 +17,7 @@ namespace ProNet
 
         public IProgrammers GetAll()
         {
-            var programmerNames = GetProgrammerNames();
-
-            var recommendations = GetProgrammers(programmerNames);
+            var recommendations = GetProgrammers();
 
             var skills = GetSkills();
 
@@ -43,9 +41,9 @@ namespace ProNet
                 .Select(skill => skill.Value);
         }
 
-        private Dictionary<string, IEnumerable<string>> GetProgrammers(IEnumerable<string> programmerNames)
+        private Dictionary<string, IEnumerable<string>> GetProgrammers()
         {
-            return programmerNames
+            return GetProgrammerNames()
                 .Select(programmer => new {
                     Programmer = programmer,
                     Recommendations = GetRecommendations(programmer)})
