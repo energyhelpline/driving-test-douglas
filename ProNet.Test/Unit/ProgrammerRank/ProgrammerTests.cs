@@ -85,5 +85,20 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             Assert.That(degressOfSeparation, Is.EqualTo(1));
         }
+
+        [Test]
+        public void Should_calculate_degrees_of_separation_from_a_programmer_a_recommendation_has_recommended_as_2()
+        {
+            var programmer3 = new Programmer("3", null);
+            var programmer1 = new Programmer("1", null);
+            var programmer2 = new Programmer("2", null);
+
+            programmer1.Recommends(programmer2);
+            programmer2.Recommends(programmer3);
+
+            var degressOfSeparation = programmer1.DegreesOfSeparation(programmer3);
+
+            Assert.That(degressOfSeparation, Is.EqualTo(2));
+        }
     }
 }
