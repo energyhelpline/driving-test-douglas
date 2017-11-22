@@ -20,6 +20,24 @@ namespace ProNet
             return _programmersFactory.BuildProgrammers(GetRecommendations(), GetSkills());
         }
 
+        private IReadOnlyDictionary<string, IEnumerable<string>> GetRecommendations()
+        {
+            return GetProgrammerNames()
+                .Select(name => new {
+                    Programmer = name,
+                    Recommendations = GetRecommendationsFor(name)
+                })
+                .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
+        }
+
+        private IEnumerable<string> GetRecommendationsFor(string name)
+        {
+            return GetProgrammer(name)
+                .Descendants("Recommendations")
+                .Descendants("Recommendation")
+                .Select(recommendation => recommendation.Value);
+        }
+
         private IReadOnlyDictionary<string, IEnumerable<string>> GetSkills()
         {
             return GetProgrammerNames()
@@ -35,22 +53,6 @@ namespace ProNet
                 .Select(skill => skill.Value);
         }
 
-        private IEnumerable<XElement> GetProgrammer(string name)
-        {
-            return _xmlLoader.Load()
-                .Descendants("Programmer")
-                .Where(p => p.Attribute("name").Value == name);
-        }
-
-        private IReadOnlyDictionary<string, IEnumerable<string>> GetRecommendations()
-        {
-            return GetProgrammerNames()
-                .Select(name => new {
-                    Programmer = name,
-                    Recommendations = GetRecommendationsFor(name)})
-                .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
-        }
-
         private IEnumerable<string> GetProgrammerNames()
         {
             return _xmlLoader.Load()
@@ -58,12 +60,11 @@ namespace ProNet
                 .Select(programmer => programmer.Attribute("name").Value );
         }
 
-        private IEnumerable<string> GetRecommendationsFor(string name)
+        private IEnumerable<XElement> GetProgrammer(string name)
         {
-            return GetProgrammer(name)
-                .Descendants("Recommendations")
-                .Descendants("Recommendation")
-                .Select(recommendation => recommendation.Value);
+            return _xmlLoader.Load()
+                .Descendants("Programmer")
+                .Where(p => p.Attribute("name").Value == name);
         }
     }
 }
