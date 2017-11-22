@@ -51,7 +51,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
         }
 
         [Test]
-        public void Should_calculate_degrees_of_separation_for_the_programmer_to_themselves_as_0()
+        public void Should_calculate_degrees_of_separation_to_themselves_as_0()
         {
             var programmer = new Programmer("1", null);
 
@@ -61,7 +61,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
         }
 
         [Test]
-        public void Should_calculate_degrees_of_separation_for_the_programmer_from_a_programmer_they_recommended_as_1()
+        public void Should_calculate_degrees_of_separation_from_a_programmer_they_recommended_as_1()
         {
             var programmer1 = new Programmer("1", null);
             var programmer2 = new Programmer("2", null);
@@ -74,7 +74,7 @@ namespace ProNet.Test.Unit.ProgrammerRank
         }
 
         [Test]
-        public void Should_calculate_degrees_of_separation_for_the_prorgammer_from_a_programmer_who_recommends_them_as_1()
+        public void Should_calculate_degrees_of_separation_from_a_programmer_who_recommends_them_as_1()
         {
             var programmer1 = new Programmer("1", null);
             var programmer2 = new Programmer("2", null);
