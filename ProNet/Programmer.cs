@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProNet
@@ -51,11 +52,19 @@ namespace ProNet
             if (this == programmer)
                 return 0;
 
-            if (HasRecommended(programmer))
-                return 1;
+            var toProcess = new Queue<Tuple<int, IProgrammer>>();
+            toProcess.Enqueue(new Tuple<int, IProgrammer>(1, this));
 
-            if (IsRecommendedBy(programmer))
-                return 1;
+            while (toProcess.Count > 0)
+            {
+                var programmerToProcess = toProcess.Dequeue();
+
+                if (programmerToProcess.Item2.HasRecommended(programmer))
+                    return programmerToProcess.Item1;
+
+                if (programmerToProcess.Item2.IsRecommendedBy(programmer))
+                    return programmerToProcess.Item1;
+            }
 
             foreach (var recommendation in _recommendations)
                 if (recommendation.HasRecommended(programmer))
