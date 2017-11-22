@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProNet
@@ -12,11 +13,11 @@ namespace ProNet
             _programmerFactory = programmerFactory;
         }
 
-        public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> rawProgrammers)
+        public IProgrammers BuildProgrammers(IReadOnlyDictionary<string, IEnumerable<string>> rawProgrammers, IReadOnlyDictionary<string, IEnumerable<string>> skills)
         {
-            var listOfProgrammers = rawProgrammers
-                .Select(programmer => _programmerFactory.BuildProgrammer(programmer.Key))
-                .ToList();
+            var listOfProgrammers = skills
+                .Select(programmer => _programmerFactory.BuildProgrammer(programmer.Key, programmer.Value))
+                .ToList(); // required so BuildProgrammer is not called every time a Programmer is accessed inside Programmers
 
             var programmers = new Programmers(listOfProgrammers);
 

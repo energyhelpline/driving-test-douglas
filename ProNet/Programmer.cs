@@ -8,13 +8,15 @@ namespace ProNet
         private readonly string _name;
         private readonly ICollection<IProgrammer> _recommendations;
         private readonly ICollection<IProgrammer> _recommendedBy;
+        private readonly IEnumerable<string> _skills;
         private decimal _rank;
 
-        public Programmer(string name)
+        public Programmer(string name, IEnumerable<string> skills)
         {
             _recommendations = new List<IProgrammer>();
             _recommendedBy = new List<IProgrammer>();
             _name = name;
+            _skills = skills;
         }
 
         public decimal Rank
@@ -26,6 +28,8 @@ namespace ProNet
         public string Name => _name;
 
         public IEnumerable<string> Recommendations => _recommendations.Select(programmer => programmer.Name);
+
+        public IEnumerable<string> Skills => _skills;
 
         public decimal ProgrammerRankShare => _rank / _recommendations.Count();
 

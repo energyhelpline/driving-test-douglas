@@ -34,7 +34,7 @@ namespace ProNet.Test.Customer
         [Test]
         public void ListProgrammerSkills()
         {
-            //Assert.That(_proNet.Skills("Bill"), Is.EqualTo(new[] {"Ruby", "Perl", "PHP"}));
+            Assert.That(_proNet.Skills("Bill"), Is.EqualTo(new[] {"Ruby", "Perl", "PHP"}));
         }
 
         [Test]

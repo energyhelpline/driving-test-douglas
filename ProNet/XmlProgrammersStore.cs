@@ -21,7 +21,26 @@ namespace ProNet
 
             var recommendations = GetProgrammers(programmerNames);
 
-            return _programmersFactory.BuildProgrammers(recommendations);
+            var skills = GetSkills();
+
+            return _programmersFactory.BuildProgrammers(recommendations, skills);
+        }
+
+        private Dictionary<string, IEnumerable<string>> GetSkills()
+        {
+            return GetProgrammerNames()
+                .Select(name => new {Name = name, Skills = GetSkills(name) })
+                .ToDictionary(programmer => programmer.Name, programmer => programmer.Skills);
+        }
+
+        private IEnumerable<string> GetSkills(string name)
+        {
+            return _xmlLoader.Load()
+                .Descendants("Programmer")
+                .Where(p => p.Attribute("name").Value == name)
+                .Descendants("Skills")
+                .Descendants("Skill")
+                .Select(skill => skill.Value);
         }
 
         private Dictionary<string, IEnumerable<string>> GetProgrammers(IEnumerable<string> programmerNames)

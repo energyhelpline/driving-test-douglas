@@ -7,5 +7,6 @@ namespace ProNet
         void Calculate();
         decimal RankFor(string name);
         IEnumerable<string> RecommendationsFor(string name);
+        IEnumerable<string> Skills(string programmer);
     }
 }

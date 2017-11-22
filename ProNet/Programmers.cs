@@ -47,6 +47,11 @@ namespace ProNet
             return _programmers.Single(programmer => programmer.Name == name).Recommendations;
         }
 
+        public IEnumerable<string> Skills(string programmer)
+        {
+            return GetByName(programmer).Skills;
+        }
+
         public void AddRecommendation(string recommender, string recommendation)
         {
             GetByName(recommender).Recommends(GetByName(recommendation));

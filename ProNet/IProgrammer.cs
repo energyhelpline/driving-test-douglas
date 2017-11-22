@@ -10,6 +10,7 @@ namespace ProNet
         void UpdateRank();
         decimal Rank { get; }
         IEnumerable<string> Recommendations { get; }
+        IEnumerable<string> Skills { get; }
         void Recommends(IProgrammer programmer);
     }
 }

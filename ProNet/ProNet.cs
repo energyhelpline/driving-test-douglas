@@ -15,7 +15,7 @@ namespace ProNet
 
         public string[] Skills(string programmer)
         {
-            throw new System.NotImplementedException();
+            return _programmers.Skills(programmer).ToArray();
         }
 
         public string[] Recommendations(string programmer)
