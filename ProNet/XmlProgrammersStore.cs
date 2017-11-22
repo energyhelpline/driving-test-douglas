@@ -41,11 +41,11 @@ namespace ProNet
         private IReadOnlyDictionary<string, IEnumerable<string>> GetSkills()
         {
             return GetProgrammerNames()
-                .Select(name => new {Name = name, Skills = GetSkills(name) })
+                .Select(name => new {Name = name, Skills = GetSkillsFor(name) })
                 .ToDictionary(programmer => programmer.Name, programmer => programmer.Skills);
         }
 
-        private IEnumerable<string> GetSkills(string name)
+        private IEnumerable<string> GetSkillsFor(string name)
         {
             return GetProgrammer(name)
                 .Descendants("Skills")
