@@ -47,7 +47,7 @@ namespace ProNet
             return GetProgrammerNames()
                 .Select(programmer => new {
                     Programmer = programmer,
-                    Recommendations = GetRecommendations(programmer)})
+                    Recommendations = GetRecommendationsFor(programmer)})
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
         }
 
@@ -58,7 +58,7 @@ namespace ProNet
                 .Select(programmer => programmer.Attribute("name").Value );
         }
 
-        private IEnumerable<string> GetRecommendations(string programmer)
+        private IEnumerable<string> GetRecommendationsFor(string programmer)
         {
             return GetProgrammer(programmer)
                 .Descendants("Recommendations")
