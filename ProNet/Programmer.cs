@@ -51,6 +51,9 @@ namespace ProNet
             if (this == programmer)
                 return 0;
 
+            if (_recommendations.Contains(programmer))
+                return 1;
+
             return 3;
         }
 
