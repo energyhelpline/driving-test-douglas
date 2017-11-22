@@ -55,6 +55,8 @@ namespace ProNet
             var toProcess = new Queue<Tuple<int, IProgrammer>>();
             toProcess.Enqueue(new Tuple<int, IProgrammer>(1, this));
 
+            var processed = new List<IProgrammer>();
+
             while (toProcess.Count > 0)
             {
                 var programmerToProcess = toProcess.Dequeue();
@@ -64,11 +66,11 @@ namespace ProNet
 
                 if (programmerToProcess.Item2.IsRecommendedBy(programmer))
                     return programmerToProcess.Item1;
-            }
 
-            foreach (var recommendation in _recommendations)
-                if (recommendation.HasRecommended(programmer))
-                    return 2;
+                processed.Add(programmerToProcess.Item2);
+
+                programmerToProcess.Item2.AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, processed);
+            }
 
             foreach(var recommendedBy in _recommendedBy)
                 if (recommendedBy.IsRecommendedBy(programmer))
@@ -85,6 +87,15 @@ namespace ProNet
         public bool IsRecommendedBy(IProgrammer programmer)
         {
             return _recommendedBy.Contains(programmer);
+        }
+
+        public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, List<IProgrammer> processed)
+        {
+            foreach (var recommendation in _recommendations)
+            {
+                if (!processed.Contains(recommendation))
+                    queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendation));
+            }
         }
 
         public void RecommendedBy(IProgrammer programmer)
