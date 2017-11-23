@@ -115,5 +115,44 @@ namespace ProNet.Test.Unit.ProgrammerRank
 
             Assert.That(degreesOfSeparation, Is.EqualTo(2));
         }
+
+        [Test]
+        public void Should_return_lowest_calculated_degree_of_separation()
+        {
+            var programmer1 = new Programmer("1", null);
+            var programmer2 = new Programmer("2", null);
+            var programmer3 = new Programmer("3", null);
+            var programmer4 = new Programmer("4", null);
+            var programmer5 = new Programmer("5", null);
+
+            programmer1.Recommends(programmer3);
+            programmer2.Recommends(programmer1);
+            programmer3.Recommends(programmer2);
+            programmer4.Recommends(programmer2);
+            programmer5.Recommends(programmer3);
+
+            var degreeOfSeparation = programmer1.DegreesOfSeparation(programmer5);
+            Assert.That(degreeOfSeparation, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Should_calculate_degree_of_separation_within_network_with_circular_reference()
+        {
+            var programmer1 = new Programmer("1", null);
+            var programmer2 = new Programmer("2", null);
+            var programmer3 = new Programmer("3", null);
+            var programmer4 = new Programmer("4", null);
+            var programmer5 = new Programmer("5", null);
+
+            programmer1.Recommends(programmer2);
+            programmer2.Recommends(programmer3);
+            programmer3.Recommends(programmer1);
+            programmer3.Recommends(programmer4);
+            programmer4.Recommends(programmer5);
+
+            var degreeOfSeparation = programmer1.DegreesOfSeparation(programmer5);
+
+            Assert.That(degreeOfSeparation, Is.EqualTo(3));
+        }
     }
 }
