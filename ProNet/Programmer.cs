@@ -57,14 +57,14 @@ namespace ProNet
             programmer.RecommendedBy(this);
         }
 
-        public int DegreesOfSeparation(IProgrammer programmer)
-        {
-            return _degreesOfSeparation.Calculate(this, programmer);
-        }
-
         public void RecommendedBy(IProgrammer programmer)
         {
             _recommendedBys.Add(programmer);
+        }
+
+        public int DegreesOfSeparation(IProgrammer programmer)
+        {
+            return _degreesOfSeparation.Calculate(this, programmer);
         }
     }
 
