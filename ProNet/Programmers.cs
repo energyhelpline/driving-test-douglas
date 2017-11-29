@@ -44,7 +44,7 @@ namespace ProNet
 
         public IEnumerable<string> RecommendationsFor(string name)
         {
-            return _programmers.Single(programmer => programmer.Name == name).Recommendations;
+            return _programmers.Single(programmer => programmer.Name == name).RecommendedProgrammers;
         }
 
         public IEnumerable<string> Skills(string programmer)

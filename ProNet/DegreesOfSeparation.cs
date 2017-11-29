@@ -33,17 +33,17 @@ namespace ProNet
 
         public bool HasRecommended(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
         {
-            return programmerToProcess.Item2._Recommendations.Contains(programmer);
+            return programmerToProcess.Item2.Recommendations.Contains(programmer);
         }
 
         public bool IsRecommendedBy(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
         {
-            return programmerToProcess.Item2._RecommendedBy.Contains(programmer);
+            return programmerToProcess.Item2.RecommendedBys.Contains(programmer);
         }
 
         public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
         {
-            foreach (var recommendation in processed._Recommendations)
+            foreach (var recommendation in processed.Recommendations)
             {
                 if (processed != recommendation)
                     queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendation));
@@ -52,7 +52,7 @@ namespace ProNet
 
         public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
         {
-            foreach (var recommendedBy in processed._RecommendedBy)
+            foreach (var recommendedBy in processed.RecommendedBys)
             {
                 if (processed != recommendedBy)
                     queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendedBy));
