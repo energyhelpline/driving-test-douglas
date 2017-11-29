@@ -25,12 +25,12 @@ namespace ProNet
             return GetProgrammerNames()
                 .Select(name => new {
                     Programmer = name,
-                    Recommendations = GetRecommendationsFor(name)
+                    Recommendations = RecommendationsFor(name)
                 })
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
         }
 
-        private IEnumerable<string> GetRecommendationsFor(string name)
+        private IEnumerable<string> RecommendationsFor(string name)
         {
             return _xmlLoader.Load()
                 .Descendants("Programmer")
@@ -43,11 +43,11 @@ namespace ProNet
         private IReadOnlyDictionary<string, IEnumerable<string>> GetSkills()
         {
             return GetProgrammerNames()
-                .Select(name => new {Name = name, Skills = GetSkillsFor(name) })
+                .Select(name => new {Name = name, Skills = SkillsFor(name) })
                 .ToDictionary(programmer => programmer.Name, programmer => programmer.Skills);
         }
 
-        private IEnumerable<string> GetSkillsFor(string name)
+        private IEnumerable<string> SkillsFor(string name)
         {
             return _xmlLoader.Load()
                 .Descendants("Programmer")
