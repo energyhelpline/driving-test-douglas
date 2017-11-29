@@ -62,16 +62,6 @@ namespace ProNet
             return _degreesOfSeparation.Calculate(this, programmer);
         }
 
-        public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
-        {
-            _degreesOfSeparation.AddRecommendationsTo(queue, degreeOfSeparation, processed);
-        }
-
-        public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
-        {
-            _degreesOfSeparation.AddRecommendedBysTo(queue, degreeOfSeparation, processed);
-        }
-
         public void RecommendedBy(IProgrammer programmer)
         {
             _recommendedBy.Add(programmer);

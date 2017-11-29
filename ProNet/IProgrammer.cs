@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ProNet
 {
@@ -16,7 +15,5 @@ namespace ProNet
         ICollection<IProgrammer> _RecommendedBy { get; }
         void Recommends(IProgrammer programmer);
         int DegreesOfSeparation(IProgrammer name);
-        void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed);
-        void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed);
     }
 }
