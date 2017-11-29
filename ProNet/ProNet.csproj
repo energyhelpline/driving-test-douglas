@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DegreesOfSeparation.cs" />
     <Compile Include="IProgrammerFactory.cs" />
     <Compile Include="IProgrammersFactory.cs" />
     <Compile Include="IProgrammersStore.cs" />
