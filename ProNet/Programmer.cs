@@ -39,11 +39,6 @@ namespace ProNet
 
         public decimal ProgrammerRankShare => _rank / _recommendations.Count();
 
-        public DegreesOfSeparation DegreesOfSeparation1
-        {
-            get { return _degreesOfSeparation; }
-        }
-
         public void UpdateRank()
         {
             // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
