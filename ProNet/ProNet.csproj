@@ -53,6 +53,7 @@
     <Compile Include="Programmer.cs" />
     <Compile Include="ProgrammerFactory.cs" />
     <Compile Include="ProgrammersFactory.cs" />
+    <Compile Include="ProgrammersNotConnectedException.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
     <Compile Include="ProNet.cs">
       <DependentUpon>ProNet.xsd</DependentUpon>
