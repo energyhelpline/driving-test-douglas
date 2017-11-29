@@ -7,8 +7,8 @@ namespace ProNet
     public class Programmer : IProgrammer
     {
         private readonly string _name;
-        public readonly ICollection<IProgrammer> _recommendations;
-        public readonly ICollection<IProgrammer> _recommendedBys;
+        private readonly ICollection<IProgrammer> _recommendations;
+        private readonly ICollection<IProgrammer> _recommendedBys;
         private readonly IEnumerable<string> _skills;
         private decimal _rank;
         private readonly DegreesOfSeparation _degreesOfSeparation;
