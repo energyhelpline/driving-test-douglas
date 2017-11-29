@@ -19,7 +19,7 @@ namespace ProNet
             _recommendedBy = new List<IProgrammer>();
             _name = name;
             _skills = skills;
-            _degreesOfSeparation = new DegreesOfSeparation(this);
+            _degreesOfSeparation = new DegreesOfSeparation();
         }
 
         public decimal Rank
@@ -27,6 +27,9 @@ namespace ProNet
             get => _rank;
             set => _rank = value;
         }
+
+        public ICollection<IProgrammer> _Recommendations => _recommendations;
+        public ICollection<IProgrammer> _RecommendedBy => _recommendedBy;
 
         public string Name => _name;
 
@@ -56,17 +59,7 @@ namespace ProNet
 
         public int DegreesOfSeparation(IProgrammer programmer)
         {
-            return _degreesOfSeparation.Calculate(programmer);
-        }
-
-        public bool HasRecommended(IProgrammer programmer)
-        {
-            return _degreesOfSeparation.HasRecommended(programmer);
-        }
-
-        public bool IsRecommendedBy(IProgrammer programmer)
-        {
-            return _degreesOfSeparation.IsRecommendedBy(programmer);
+            return _degreesOfSeparation.Calculate(this, programmer);
         }
 
         public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)

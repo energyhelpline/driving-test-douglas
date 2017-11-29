@@ -12,10 +12,10 @@ namespace ProNet
         decimal Rank { get; }
         IEnumerable<string> Recommendations { get; }
         IEnumerable<string> Skills { get; }
+        ICollection<IProgrammer> _Recommendations { get; }
+        ICollection<IProgrammer> _RecommendedBy { get; }
         void Recommends(IProgrammer programmer);
         int DegreesOfSeparation(IProgrammer name);
-        bool HasRecommended(IProgrammer programmer);
-        bool IsRecommendedBy(IProgrammer programmer);
         void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed);
         void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed);
     }

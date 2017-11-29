@@ -5,52 +5,45 @@ namespace ProNet
 {
     public class DegreesOfSeparation
     {
-        private Programmer _programmer;
-
-        public DegreesOfSeparation(Programmer programmer1)
+        public int Calculate(IProgrammer programmerFrom, IProgrammer programmer)
         {
-            _programmer = programmer1;
-        }
-
-        public int Calculate(IProgrammer programmer)
-        {
-            if (_programmer == programmer)
+            if (programmerFrom == programmer)
                 return 0;
 
             var toProcess = new Queue<Tuple<int, IProgrammer>>();
-            toProcess.Enqueue(new Tuple<int, IProgrammer>(1, _programmer));
+            toProcess.Enqueue(new Tuple<int, IProgrammer>(1, programmerFrom));
 
             while (toProcess.Count > 0)
             {
                 var programmerToProcess = toProcess.Dequeue();
 
-                if (programmerToProcess.Item2.HasRecommended(programmer))
+                if (HasRecommended(programmerToProcess, programmer))
                     return programmerToProcess.Item1;
 
-                if (programmerToProcess.Item2.IsRecommendedBy(programmer))
+                if (IsRecommendedBy(programmerToProcess, programmer))
                     return programmerToProcess.Item1;
 
-                programmerToProcess.Item2.AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
+                AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
 
-                programmerToProcess.Item2.AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
+                AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
             }
 
             throw new ProgrammersNotConnectedException();
         }
 
-        public bool HasRecommended(IProgrammer programmer)
+        public bool HasRecommended(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
         {
-            return _programmer._recommendations.Contains(programmer);
+            return programmerToProcess.Item2._Recommendations.Contains(programmer);
         }
 
-        public bool IsRecommendedBy(IProgrammer programmer)
+        public bool IsRecommendedBy(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
         {
-            return _programmer._recommendedBy.Contains(programmer);
+            return programmerToProcess.Item2._RecommendedBy.Contains(programmer);
         }
 
         public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
         {
-            foreach (var recommendation in _programmer._recommendations)
+            foreach (var recommendation in processed._Recommendations)
             {
                 if (processed != recommendation)
                     queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendation));
@@ -59,7 +52,7 @@ namespace ProNet
 
         public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
         {
-            foreach (var recommendedBy in _programmer._recommendedBy)
+            foreach (var recommendedBy in processed._RecommendedBy)
             {
                 if (processed != recommendedBy)
                     queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendedBy));
