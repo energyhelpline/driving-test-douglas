@@ -1,25 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace ProNet
 {
     public class ProgrammerRank
     {
-        private decimal _rank;
+        private readonly RankedAssociation _association;
 
-        public void UpdateRank(ICollection<IProgrammer> recommendedBys)
+        public ProgrammerRank(RankedAssociation association)
         {
-            // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
-            Rank = recommendedBys
-                .Aggregate(1m - 0.85m, (current, programmer) => current + 0.85m * programmer.ProgrammerRankShare);
+            _association = association;
         }
 
-        public decimal ProgrammerRankShare(ICollection<IProgrammer> recommendations) => Rank / recommendations.Count;
-
-        public decimal Rank
+        public void UpdateRank()
         {
-            get => _rank;
-            set => _rank = value;
+            // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
+            _association.Rank = _association.RecommendedBys()
+                .Aggregate(1m - 0.85m, (current, association) => current + 0.85m * association.Rank / association.RecommendationsCount);
         }
     }
 }

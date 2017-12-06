@@ -5,14 +5,14 @@ namespace ProNet
     public interface IProgrammer
     {
         void RecommendedBy(IProgrammer programmer);
-        decimal ProgrammerRankShare { get; }
         string Name { get; }
         void UpdateRank();
         decimal Rank { get; }
         IEnumerable<string> RecommendedProgrammers { get; }
         IEnumerable<string> Skills { get; }
-        ICollection<IProgrammer> Recommendations { get; }
-        ICollection<IProgrammer> RecommendedBys { get; }
+        Association Association { get; }
+        RankedAssociation RankedAssociation { get; }
+        NamedAssociation NamedAssociation { get; }
         void Recommends(IProgrammer programmer);
         int DegreesOfSeparation(IProgrammer name);
     }
