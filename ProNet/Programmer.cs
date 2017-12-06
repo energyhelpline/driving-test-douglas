@@ -27,15 +27,12 @@ namespace ProNet
             get => _programmerRank.Rank;
             set => _programmerRank.Rank = value;
         }
+        public string Name => _name;
+        public IEnumerable<string> RecommendedProgrammers => _recommendations.Select(programmer => programmer.Name);
+        public IEnumerable<string> Skills => _skills;
 
         public ICollection<IProgrammer> Recommendations => _recommendations;
         public ICollection<IProgrammer> RecommendedBys => _recommendedBys;
-
-        public string Name => _name;
-
-        public IEnumerable<string> RecommendedProgrammers => _recommendations.Select(programmer => programmer.Name);
-
-        public IEnumerable<string> Skills => _skills;
 
         public decimal ProgrammerRankShare => _programmerRank.ProgrammerRankShare(_recommendations);
 
