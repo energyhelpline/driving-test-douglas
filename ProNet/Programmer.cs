@@ -75,24 +75,24 @@ namespace ProNet
 
     public class RankedAssociation
     {
-        private readonly ICollection<RankedAssociation> _recommendations;
         private readonly ICollection<RankedAssociation> _recommendedBys;
         private decimal _rank;
+        private int _recommendationCount;
 
         public RankedAssociation()
         {
-            _recommendations = new List<RankedAssociation>();
             _recommendedBys = new List<RankedAssociation>();
             _rank = 0;
+            _recommendationCount = 0;
         }
 
         public decimal Rank => _rank;
 
-        public decimal RecommendationsCount => _recommendations.Count;
+        public decimal RecommendationsCount => _recommendationCount;
 
         public void Recommends(RankedAssociation programmer)
         {
-            _recommendations.Add(programmer);
+            _recommendationCount++;
             programmer.RecommendedBy(this);
         }
 
