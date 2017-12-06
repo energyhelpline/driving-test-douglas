@@ -21,12 +21,12 @@ namespace ProNet
 
         public decimal RankFor(string name)
         {
-            return _programmers.Single(programmer => programmer.Name == name).Rank;
+            return GetByName(name).Rank;
         }
 
         public IEnumerable<string> RecommendationsFor(string name)
         {
-            return _programmers.Single(programmer => programmer.Name == name).RecommendedProgrammers;
+            return GetByName(name).RecommendedProgrammers;
         }
 
         public IEnumerable<string> Skills(string programmer)
