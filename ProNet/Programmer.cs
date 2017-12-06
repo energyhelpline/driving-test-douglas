@@ -8,7 +8,6 @@ namespace ProNet
         private readonly string _name;
         private readonly IEnumerable<string> _skills;
         private readonly DegreesOfSeparation _degreesOfSeparation;
-        private readonly ProgrammerRank _programmerRank;
         private readonly Association _association;
         private readonly RankedAssociation _rankedAssociation;
         private readonly NamedAssociation _namedAssociation;
@@ -20,7 +19,6 @@ namespace ProNet
             _association = new Association();
             _degreesOfSeparation = new DegreesOfSeparation(_association);
             _rankedAssociation = new RankedAssociation();
-            _programmerRank = new ProgrammerRank(_rankedAssociation);
             _namedAssociation = new NamedAssociation(_name);
         }
 
@@ -34,7 +32,7 @@ namespace ProNet
 
         public void UpdateRank()
         {
-            _programmerRank.UpdateRank();
+            _rankedAssociation.UpdateRank();
         }
 
         public void Recommends(IProgrammer programmer)
@@ -88,11 +86,7 @@ namespace ProNet
             _rank = 0;
         }
 
-        public decimal Rank
-        {
-            get => _rank;
-            set => _rank = value;
-        }
+        public decimal Rank => _rank;
 
         public decimal RecommendationsCount => _recommendations.Count;
 
@@ -110,6 +104,13 @@ namespace ProNet
         public ICollection<RankedAssociation> RecommendedBys()
         {
             return _recommendedBys;
+        }
+
+        public void UpdateRank()
+        {
+            // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
+            _rank = RecommendedBys()
+                .Aggregate(1m - 0.85m, (current, association) => current + 0.85m * association.Rank / association.RecommendationsCount);
         }
     }
 
