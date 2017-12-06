@@ -12,24 +12,6 @@ namespace ProNet
             _programmers = programmers;
         }
 
-        private decimal AverageRank()
-        {
-            var totalRank = 0m;
-            foreach (var programmer in _programmers)
-            {
-                totalRank += programmer.Rank;
-            }
-            return totalRank / _programmers.Count();
-        }
-
-        private void UpdateRanks()
-        {
-            foreach (var programmer in _programmers)
-            {
-                programmer.UpdateRank();
-            }
-        }
-
         public void Calculate()
         {
             do
@@ -65,6 +47,24 @@ namespace ProNet
         private IProgrammer GetByName(string name)
         {
             return _programmers.Single(programmer => programmer.Name == name);
+        }
+
+        private decimal AverageRank()
+        {
+            var totalRank = 0m;
+            foreach (var programmer in _programmers)
+            {
+                totalRank += programmer.Rank;
+            }
+            return totalRank / _programmers.Count();
+        }
+
+        private void UpdateRanks()
+        {
+            foreach (var programmer in _programmers)
+            {
+                programmer.UpdateRank();
+            }
         }
     }
 }
