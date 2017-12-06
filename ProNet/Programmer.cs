@@ -107,17 +107,6 @@ namespace ProNet
             _recommendedBys.Add(programmer);
         }
 
-        public IEnumerable<string> RecommendedProgrammers()
-        {
-            return new[] { string.Empty };
-            //return _recommendations.Select(programmer => programmer.Name); // this is really violating MVC as it's a view
-        }
-
-        public ICollection<RankedAssociation> Recommendations()
-        {
-            return _recommendations;
-        }
-
         public ICollection<RankedAssociation> RecommendedBys()
         {
             return _recommendedBys;
@@ -144,12 +133,6 @@ namespace ProNet
         public void RecommendedBy(Association programmer)
         {
             _recommendedBys.Add(programmer);
-        }
-
-        public IEnumerable<string> RecommendedProgrammers()
-        {
-            return new[] { string.Empty };
-            //return _recommendations.Select(programmer => programmer.Name); // this is really violating MVC as it's a view
         }
 
         public ICollection<Association> Recommendations()
