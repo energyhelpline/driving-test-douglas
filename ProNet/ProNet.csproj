@@ -52,6 +52,7 @@
     <Compile Include="IXmlLoader.cs" />
     <Compile Include="Programmer.cs" />
     <Compile Include="ProgrammerFactory.cs" />
+    <Compile Include="ProgrammerRank.cs" />
     <Compile Include="ProgrammersFactory.cs" />
     <Compile Include="ProgrammersNotConnectedException.cs" />
     <Compile Include="XmlProgrammersStore.cs" />
