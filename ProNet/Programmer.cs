@@ -10,7 +10,7 @@ namespace ProNet
         private readonly ICollection<IProgrammer> _recommendedBys;
         private readonly IEnumerable<string> _skills;
         private readonly DegreesOfSeparation _degreesOfSeparation;
-        private readonly ProgrammerRank _programmerRank;
+        private decimal _rank;
 
         public Programmer(string name, IEnumerable<string> skills)
         {
@@ -19,13 +19,12 @@ namespace ProNet
             _name = name;
             _skills = skills;
             _degreesOfSeparation = new DegreesOfSeparation();
-            _programmerRank = new ProgrammerRank();
         }
 
         public decimal Rank
         {
-            get => _programmerRank.Rank;
-            set => _programmerRank.Rank = value;
+            get => _rank;
+            get => _rank = value;
         }
         public string Name => _name;
         public IEnumerable<string> RecommendedProgrammers => _recommendations.Select(programmer => programmer.Name);
@@ -34,11 +33,13 @@ namespace ProNet
         public ICollection<IProgrammer> Recommendations => _recommendations;
         public ICollection<IProgrammer> RecommendedBys => _recommendedBys;
 
-        public decimal ProgrammerRankShare => _programmerRank.ProgrammerRankShare(_recommendations);
+        public decimal ProgrammerRankShare => _rank / _recommendations.Count;
 
         public void UpdateRank()
         {
-            _programmerRank.UpdateRank(_recommendedBys);
+            // (1 - d) + d(PR(T1)/C(T1)) + ... + d(PR(Tn)/C(Tn))
+            _rank = _recommendedBys
+                .Aggregate(1m - 0.85m, (current, programmer) => current + 0.85m * programmer.ProgrammerRankShare);
         }
 
         public void Recommends(IProgrammer programmer)
