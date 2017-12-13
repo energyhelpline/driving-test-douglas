@@ -5,7 +5,7 @@ namespace ProNet
 {
     public class ProNet : IProNet
     {
-        private readonly IRankedProgrammers _programmers;
+        private readonly IProgrammers _programmers;
 
         public ProNet(IProgrammersStore programmersStore)
         {

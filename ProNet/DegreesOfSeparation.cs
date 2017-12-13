@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProNet
 {
     public class DegreesOfSeparation
     {
-        public int Calculate(IProgrammer programmerFrom, IProgrammer programmer)
+        public int Calculate(IAssociation programmerFrom, IAssociation programmer)
         {
             if (programmerFrom == programmer)
                 return 0;
 
-            var toProcess = new Queue<Tuple<int, IProgrammer>>();
-            toProcess.Enqueue(new Tuple<int, IProgrammer>(1, programmerFrom));
+            var toProcess = new Queue<Tuple<int, IAssociation>>();
+            toProcess.Enqueue(new Tuple<int, IAssociation>(1, programmerFrom));
 
             while (toProcess.Count > 0)
             {
@@ -31,31 +32,31 @@ namespace ProNet
             throw new NotConnected();
         }
 
-        public bool HasRecommended(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
+        public bool HasRecommended(Tuple<int, IAssociation> programmerToProcess, IAssociation programmer)
         {
             return programmerToProcess.Item2.Recommendations.Contains(programmer);
         }
 
-        public bool IsRecommendedBy(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
+        public bool IsRecommendedBy(Tuple<int, IAssociation> programmerToProcess, IAssociation programmer)
         {
             return programmerToProcess.Item2.RecommendedBys.Contains(programmer);
         }
 
-        public void AddRecommendationsTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
+        public void AddRecommendationsTo(Queue<Tuple<int, IAssociation>> queue, int degreeOfSeparation, IAssociation processed)
         {
             foreach (var recommendation in processed.Recommendations)
             {
                 if (processed != recommendation)
-                    queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendation));
+                    queue.Enqueue(new Tuple<int, IAssociation>(degreeOfSeparation, recommendation));
             }
         }
 
-        public void AddRecommendedBysTo(Queue<Tuple<int, IProgrammer>> queue, int degreeOfSeparation, IProgrammer processed)
+        public void AddRecommendedBysTo(Queue<Tuple<int, IAssociation>> queue, int degreeOfSeparation, IAssociation processed)
         {
             foreach (var recommendedBy in processed.RecommendedBys)
             {
                 if (processed != recommendedBy)
-                    queue.Enqueue(new Tuple<int, IProgrammer>(degreeOfSeparation, recommendedBy));
+                    queue.Enqueue(new Tuple<int, IAssociation>(degreeOfSeparation, recommendedBy));
             }
         }
     }
