@@ -30,7 +30,7 @@ namespace ProNet
 
         public int DegreesOfSeparation(string programmer1, string programmer2)
         {
-            throw new System.NotImplementedException();
+            return _programmers.DegreesOfSeparation(programmer1, programmer2);
         }
 
         public double TeamStrength(string language, string[] team)

@@ -9,8 +9,11 @@ namespace ProNet
         string Name { get; }
         void UpdateRank();
         decimal Rank { get; }
-        IEnumerable<string> Recommendations { get; }
+        IEnumerable<string> RecommendedProgrammers { get; }
         IEnumerable<string> Skills { get; }
+        ICollection<IProgrammer> Recommendations { get; }
+        ICollection<IProgrammer> RecommendedBys { get; }
         void Recommends(IProgrammer programmer);
+        int DegreesOfSeparation(IProgrammer name);
     }
 }

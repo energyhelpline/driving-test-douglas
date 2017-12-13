@@ -12,6 +12,43 @@ namespace ProNet
             _programmers = programmers;
         }
 
+        public void Calculate()
+        {
+            do
+                UpdateRanks();
+            while (1 - AverageRank() >= 0.000001m);
+        }
+
+        public decimal RankFor(string name)
+        {
+            return GetByName(name).Rank;
+        }
+
+        public IEnumerable<string> RecommendationsFor(string name)
+        {
+            return GetByName(name).RecommendedProgrammers;
+        }
+
+        public IEnumerable<string> Skills(string programmer)
+        {
+            return GetByName(programmer).Skills;
+        }
+
+        public int DegreesOfSeparation(string programmer1, string programmer2)
+        {
+            return GetByName(programmer1).DegreesOfSeparation(GetByName(programmer2));
+        }
+
+        public void AddRecommendation(string recommender, string recommendation)
+        {
+            GetByName(recommender).Recommends(GetByName(recommendation));
+        }
+
+        private IProgrammer GetByName(string name)
+        {
+            return _programmers.Single(programmer => programmer.Name == name);
+        }
+
         private decimal AverageRank()
         {
             var totalRank = 0m;
@@ -28,38 +65,6 @@ namespace ProNet
             {
                 programmer.UpdateRank();
             }
-        }
-
-        public void Calculate()
-        {
-            do
-                UpdateRanks();
-            while (1 - AverageRank() >= 0.000001m);
-        }
-
-        public decimal RankFor(string name)
-        {
-            return _programmers.Single(programmer => programmer.Name == name).Rank;
-        }
-
-        public IEnumerable<string> RecommendationsFor(string name)
-        {
-            return _programmers.Single(programmer => programmer.Name == name).Recommendations;
-        }
-
-        public IEnumerable<string> Skills(string programmer)
-        {
-            return GetByName(programmer).Skills;
-        }
-
-        public void AddRecommendation(string recommender, string recommendation)
-        {
-            GetByName(recommender).Recommends(GetByName(recommendation));
-        }
-
-        private IProgrammer GetByName(string name)
-        {
-            return _programmers.Single(programmer => programmer.Name == name);
         }
     }
 }

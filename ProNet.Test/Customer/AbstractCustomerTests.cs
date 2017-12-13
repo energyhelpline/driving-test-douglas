@@ -52,7 +52,7 @@ namespace ProNet.Test.Customer
         [Test]
         public void GetDegreesOfSeparation()
         {
-            //Assert.That(_proNet.DegreesOfSeparation("Jill", "Rick"), Is.EqualTo(3));
+            Assert.That(_proNet.DegreesOfSeparation("Jill", "Rick"), Is.EqualTo(3));
         }
 
         [Test]

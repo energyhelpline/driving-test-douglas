@@ -25,14 +25,16 @@ namespace ProNet
             return GetProgrammerNames()
                 .Select(name => new {
                     Programmer = name,
-                    Recommendations = GetRecommendationsFor(name)
+                    Recommendations = RecommendationsFor(name)
                 })
                 .ToDictionary(tuple => tuple.Programmer, tuple => tuple.Recommendations);
         }
 
-        private IEnumerable<string> GetRecommendationsFor(string name)
+        private IEnumerable<string> RecommendationsFor(string name)
         {
-            return GetProgrammer(name)
+            return _xmlLoader.Load()
+                .Descendants("Programmer")
+                .Where(p => p.Attribute("name").Value == name)
                 .Descendants("Recommendations")
                 .Descendants("Recommendation")
                 .Select(recommendation => recommendation.Value);
@@ -41,13 +43,15 @@ namespace ProNet
         private IReadOnlyDictionary<string, IEnumerable<string>> GetSkills()
         {
             return GetProgrammerNames()
-                .Select(name => new {Name = name, Skills = GetSkillsFor(name) })
+                .Select(name => new {Name = name, Skills = SkillsFor(name) })
                 .ToDictionary(programmer => programmer.Name, programmer => programmer.Skills);
         }
 
-        private IEnumerable<string> GetSkillsFor(string name)
+        private IEnumerable<string> SkillsFor(string name)
         {
-            return GetProgrammer(name)
+            return _xmlLoader.Load()
+                .Descendants("Programmer")
+                .Where(p => p.Attribute("name").Value == name)
                 .Descendants("Skills")
                 .Descendants("Skill")
                 .Select(skill => skill.Value);
@@ -55,20 +59,9 @@ namespace ProNet
 
         private IEnumerable<string> GetProgrammerNames()
         {
-            return GetProgrmmerElements()
-                .Select(programmer => programmer.Attribute("name").Value );
-        }
-
-        private IEnumerable<XElement> GetProgrmmerElements()
-        {
             return _xmlLoader.Load()
-                .Descendants("Programmer");
-        }
-
-        private IEnumerable<XElement> GetProgrammer(string name)
-        {
-            return GetProgrmmerElements()
-                .Where(p => p.Attribute("name").Value == name);
+                .Descendants("Programmer")
+                .Select(programmer => programmer.Attribute("name").Value );
         }
     }
 }
