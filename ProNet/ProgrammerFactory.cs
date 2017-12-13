@@ -6,7 +6,7 @@ namespace ProNet
     {
         public IProgrammer BuildProgrammer(string name, IEnumerable<string> skills)
         {
-            return new Programmer(name, skills);
+            return new Programmer(name, skills, 0m);
         }
     }
 }

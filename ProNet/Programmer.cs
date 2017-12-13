@@ -12,20 +12,17 @@ namespace ProNet
         private readonly DegreesOfSeparation _degreesOfSeparation;
         private decimal _rank;
 
-        public Programmer(string name, IEnumerable<string> skills)
+        public Programmer(string name, IEnumerable<string> skills, decimal rank)
         {
             _recommendations = new List<IProgrammer>();
             _recommendedBys = new List<IProgrammer>();
             _name = name;
             _skills = skills;
+            _rank = rank;
             _degreesOfSeparation = new DegreesOfSeparation();
         }
 
-        public decimal Rank
-        {
-            get => _rank;
-            get => _rank = value;
-        }
+        public decimal Rank => _rank;
         public string Name => _name;
         public IEnumerable<string> RecommendedProgrammers => _recommendations.Select(programmer => programmer.Name);
         public IEnumerable<string> Skills => _skills;
