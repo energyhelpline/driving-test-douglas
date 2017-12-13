@@ -28,7 +28,7 @@ namespace ProNet
                 AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
             }
 
-            throw new ProgrammersNotConnectedException();
+            throw new NotConnected();
         }
 
         public bool HasRecommended(Tuple<int, IProgrammer> programmerToProcess, IProgrammer programmer)
