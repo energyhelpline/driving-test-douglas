@@ -27,9 +27,6 @@ namespace ProNet
         public IEnumerable<string> RecommendedProgrammers => _recommendations.Select(programmer => programmer.Name);
         public IEnumerable<string> Skills => _skills;
 
-        public IEnumerable<IAssociation> Recommendations => _recommendations;
-        public IEnumerable<IAssociation> RecommendedBys => _recommendedBys;
-
         public decimal ProgrammerRankShare => _rank / _recommendations.Count;
 
         public void UpdateRank()
@@ -42,6 +39,26 @@ namespace ProNet
         public int DegreesOfSeparation(IAssociation programmer)
         {
             return _degreesOfSeparation.Calculate(this, programmer);
+        }
+
+        public bool HasRecommended(IAssociation programmer)
+        {
+            return _recommendations.Contains(programmer);
+        }
+
+        public bool IsRecommendedBy(IAssociation programmer)
+        {
+            return _recommendedBys.Contains(programmer);
+        }
+
+        public void AddRecommendationsTo(DegreesOfSeparation degreesOfSeparation)
+        {
+            degreesOfSeparation.AddToQueue(_recommendations);
+        }
+
+        public void AddRecommendedBysTo(DegreesOfSeparation degreesOfSeparation)
+        {
+            degreesOfSeparation.AddToQueue(_recommendedBys);
         }
 
         public void Recommends(IProgrammer programmer)

@@ -1,62 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ProNet
 {
     public class DegreesOfSeparation
     {
+        private Queue<Tuple<int, IAssociation>> _toProcess;
+        private int _degreeOfSeparation;
+        private IAssociation _associationProcessed;
+
         public int Calculate(IAssociation programmerFrom, IAssociation programmer)
         {
             if (programmerFrom == programmer)
                 return 0;
 
             var toProcess = new Queue<Tuple<int, IAssociation>>();
-            toProcess.Enqueue(new Tuple<int, IAssociation>(1, programmerFrom));
+            _toProcess = toProcess;
+            _toProcess.Enqueue(new Tuple<int, IAssociation>(1, programmerFrom));
 
-            while (toProcess.Count > 0)
+            while (_toProcess.Count > 0)
             {
-                var programmerToProcess = toProcess.Dequeue();
+                var programmerToProcess = _toProcess.Dequeue();
 
-                if (HasRecommended(programmerToProcess, programmer))
+                if (HasRecommended(programmerToProcess.Item2, programmer))
                     return programmerToProcess.Item1;
 
-                if (IsRecommendedBy(programmerToProcess, programmer))
+                if (IsRecommendedBy(programmerToProcess.Item2, programmer))
                     return programmerToProcess.Item1;
 
-                AddRecommendationsTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
+                _degreeOfSeparation = programmerToProcess.Item1 + 1;
+                _associationProcessed = programmerToProcess.Item2;
 
-                AddRecommendedBysTo(toProcess, programmerToProcess.Item1 + 1, programmerToProcess.Item2);
+                AddRecommendationsTo(_associationProcessed);
+
+                AddRecommendedBysTo(_associationProcessed);
             }
 
             throw new NotConnected();
         }
 
-        public bool HasRecommended(Tuple<int, IAssociation> programmerToProcess, IAssociation programmer)
+        public bool HasRecommended(IAssociation associationToProcess, IAssociation programmer)
         {
-            return programmerToProcess.Item2.Recommendations.Contains(programmer);
+            return associationToProcess.HasRecommended(programmer);
         }
 
-        public bool IsRecommendedBy(Tuple<int, IAssociation> programmerToProcess, IAssociation programmer)
+        public bool IsRecommendedBy(IAssociation associationToProcess, IAssociation programmer)
         {
-            return programmerToProcess.Item2.RecommendedBys.Contains(programmer);
+            return associationToProcess.IsRecommendedBy(programmer);
         }
 
-        public void AddRecommendationsTo(Queue<Tuple<int, IAssociation>> queue, int degreeOfSeparation, IAssociation processed)
+        public void AddRecommendationsTo(IAssociation processed)
         {
-            foreach (var recommendation in processed.Recommendations)
+            processed.AddRecommendationsTo(this);
+        }
+
+        public void AddRecommendedBysTo(IAssociation processed)
+        {
+            processed.AddRecommendedBysTo(this);
+        }
+
+        public void AddToQueue(IEnumerable<IAssociation> recommendations)
+        {
+            foreach (var recommendation in recommendations)
             {
-                if (processed != recommendation)
-                    queue.Enqueue(new Tuple<int, IAssociation>(degreeOfSeparation, recommendation));
-            }
-        }
-
-        public void AddRecommendedBysTo(Queue<Tuple<int, IAssociation>> queue, int degreeOfSeparation, IAssociation processed)
-        {
-            foreach (var recommendedBy in processed.RecommendedBys)
-            {
-                if (processed != recommendedBy)
-                    queue.Enqueue(new Tuple<int, IAssociation>(degreeOfSeparation, recommendedBy));
+                if (_associationProcessed != recommendation)
+                    _toProcess.Enqueue(new Tuple<int, IAssociation>(_degreeOfSeparation, recommendation));
             }
         }
     }

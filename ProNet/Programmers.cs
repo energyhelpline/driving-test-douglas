@@ -26,7 +26,7 @@ namespace ProNet
 
         public IEnumerable<string> RecommendationsFor(string name)
         {
-            return GetByName(name).Recommendations();
+            return GetByName(name).RecommendedProgrammers;
         }
 
         public IEnumerable<string> Skills(string programmer)

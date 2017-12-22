@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace ProNet
+﻿namespace ProNet
 {
     public interface IAssociation
     {
-        IEnumerable<IAssociation> Recommendations { get; }
-        IEnumerable<IAssociation> RecommendedBys { get; }
         int DegreesOfSeparation(IAssociation name);
+        bool HasRecommended(IAssociation programmer);
+        bool IsRecommendedBy(IAssociation programmer);
+        void AddRecommendationsTo(DegreesOfSeparation degreesOfSeparation);
+        void AddRecommendedBysTo(DegreesOfSeparation degreesOfSeparation);
     }
 }
